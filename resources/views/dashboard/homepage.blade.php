@@ -13,14 +13,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
-            <div class="fade-in">
-              <div class="card">
-                <div class="card-header"> Dashboard</div>
-                <div class="card-body">
-                  <h1>DASHBOARD CONTENT HERE</h1>
-                </div>
-              </div>
-            </div>
-          </div>
+
+  <h1>X-ERP DASHBOARD</h1>
+                
 @endsection

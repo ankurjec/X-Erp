@@ -15,7 +15,7 @@
     </div>
 </div>
 
-
+<div class="table100 ver1">
 <table class="table table-bordered">
   <tr>
      <th>No</th>
@@ -34,7 +34,7 @@
             
             @if(auth()->id() == 1)
             @can('role-delete')
-                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
+                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline','class'=>'delForm']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
             @endcan
@@ -44,7 +44,7 @@
     </tr>
     @endforeach
 </table>
-
+</div>
 
 {!! $roles->render() !!}
 

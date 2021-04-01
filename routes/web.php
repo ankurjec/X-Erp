@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PaymentsReceivedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +29,17 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-    
     Route::get('dashboard', function () {
         return view('dashboard.homepage');
     })->name('dashboard');
+    
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+     Route::resource('projects', ProjectController::class);
+    
+    Route::resource('vendors', VendorController::class);
+    Route::resource('customers', CustomerController::class);
+    Route::resource('expenses', ExpenseController::class);
+    Route::resource('payments_received', PaymentsReceivedController::class);
+    
 });

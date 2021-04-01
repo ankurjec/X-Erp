@@ -31,6 +31,7 @@
     <!--<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-118965717-3');gtag('config','UA-118965717-5');</script>-->
     <link href="/vendor/coreui/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/vendor/jquery-confirm/jquery-confirm.min.css?v=3.3.4') }}">
     <style type="text/css">
       .c-main {
         padding-top: 10px;
@@ -38,6 +39,32 @@
       div.dataTables_wrapper div.dataTables_length select {
         width: 50px!important;
       }
+      
+      .table100 { background-color: #fff;}
+      table { width: 100%;}
+      th, td { font-weight: unset; padding-right: 10px;}
+      .column1 { width: 33%; padding-left: 40px;}
+      .column2 { width: 13%;}
+      .column3 { width: 22%;}
+      .column4 { width: 19%;}
+      .column5 { width: 13%;}
+      .table100-head th { padding-top: 18px; padding-bottom: 18px;}
+      .table100-body td { padding-top: 16px; padding-bottom: 16px;}
+      /*==================================================================[ Fix header ]*/
+      .table100 { position: relative; /*padding-top: 60px;*/}
+      .table100-head { position: absolute; width: 100%; top: 0; left: 0;}
+      .table100-body { max-height: 585px; overflow: auto;}
+      /*==================================================================[ Ver1 ]*/
+      .table100.ver1 th { font-family: Lato-Bold; font-size: 18px; color: #fff; line-height: 1.4; background-color: #607d8b;}
+      .table100.ver1 td { font-family: Lato-Regular; font-size: 15px; color: #808080; line-height: 1.4;}
+      .table100.ver1 .table100-body tr:nth-child(even) { background-color: #f8f6ff;}
+      /*---------------------------------------------*/
+      .table100.ver1 { overflow: hidden; box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);}
+      .table100.ver1 .ps__rail-y { right: 5px;}
+      .table100.ver1 .ps__rail-y::before { background-color: #ebebeb;}
+      .table100.ver1 .ps__rail-y .ps__thumb-y::before { background-color: #cccccc;}
+      .img-responsive{margin-left: auto;margin-right: auto;}
+      .table100.ver1 .table {margin-bottom:0}
     </style>
     @section('style')
     @show
@@ -53,7 +80,18 @@
       <div class="c-body">
         <main class="c-main">
           @include('dashboard.shared.alert')
+          
+          <div class="container-fluid">
+            <div class="fade-in">
+              <div class="card">
+                <!--<div class="card-header"> Dashboard</div>-->
+                <div class="card-body">
           @yield('content')
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </main>
         
         @include('dashboard.shared.footer')
@@ -72,7 +110,34 @@
     <script src="/vendor/coreui/js/main.js"></script>-->
     <!-- jQuery -->
   <script src="/vendor/plugins/jquery/jquery.min.js"></script>
-    @section('script')
-    @show
+  <script type="text/javascript" src="{{ asset('/vendor/jquery-confirm/jquery-confirm.min.js?v=3.3.4') }}"></script>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".delForm button[type=submit]").on('click', function(e){
+          e.preventDefault();
+          $.confirm({
+  			    title: 'Confirm!',
+  			    content: 'Confirm Deletion?',
+  			    buttons: {
+  			    	confirm: {
+  			            text: 'Delete',
+  			            btnClass: 'btn-danger',
+  			            action: function(){
+  			                $(".delForm").submit();
+  			                return true;
+  			            }
+  			        },
+  			        cancel: function() {
+  					    }
+  			    }
+  			});
+  			return false;
+      });
+    });
+  </script>
+  @section('script')
+  @show
+    
   </body>
 </html>
