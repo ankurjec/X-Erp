@@ -8,7 +8,7 @@
                 <h2>Customers</h2>
             </div>
             <div class="pull-right">
-                @can('vendor-create')
+                @can('customer-create')
                 <a class="btn btn-success" href="{{ route('customers.create') }}"> New Customer</a>
                 @endcan
             </div>

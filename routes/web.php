@@ -10,6 +10,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PaymentsReceivedController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('customers', CustomerController::class);
     Route::resource('expenses', ExpenseController::class);
     Route::resource('payments_received', PaymentsReceivedController::class);
+    Route::resource('payments', PaymentController::class);
     
 });

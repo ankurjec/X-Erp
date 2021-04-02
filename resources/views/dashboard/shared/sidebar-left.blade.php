@@ -115,6 +115,20 @@
     </li>
     @endcan
     
+    @can('payment-list')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-grid"></use>
+            </svg> Payments Made
+      </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Payments</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments.create') }}"><span class="c-sidebar-nav-icon"></span> Add Payments</a></li>
+      </ul>
+    </li>
+    @endcan
+    
   </ul>
   
   <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>

@@ -73,6 +73,10 @@
 		            <input type="text" name="gst_no" class="form-control" placeholder="GST No" value="{{$payment_received->gst_no}}">
 		        </div>
 		    </div>
+		    
+		    </div>
+		 <div class="col-xs-6 col-sm-6 col-md-6">
+		 	
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>CGST Amount:</strong>
@@ -92,8 +96,6 @@
 		        </div>
 		    </div>
 		 
-		 </div>
-		 <div class="col-xs-6 col-sm-6 col-md-6">
 		     
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
