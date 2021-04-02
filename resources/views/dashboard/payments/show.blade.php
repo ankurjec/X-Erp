@@ -37,21 +37,21 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>User:</strong>
-                {{ $payment->user_id }}
+                {{ $payment->user->name }}
             </div>
         </div>
         @elseif($payment->paid_entity == 'vendor')
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Vendor:</strong>
-                {{ $payment->vendor_id }}
+                {{ $payment->vendor->name }}
             </div>
         </div>
         @elseif($payment->paid_entity == 'customer')
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Customer:</strong>
-                {{ $payment->customer_id }}
+                {{ $payment->customer->name }}
             </div>
         </div>
         @endif
