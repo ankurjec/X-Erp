@@ -1,6 +1,22 @@
 @extends('layouts.admin-master')
 
+@section('breadcrumb')
+<div class="c-subheader px-3">
+          <!-- Breadcrumb-->
+          <ol class="breadcrumb border-0 m-0">
+            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+            <li class="breadcrumb-item active">Manage Users</li>
+            <!-- Breadcrumb Menu-->
+          </ol>
+</div>
+@endsection
+
 @section('content')
+<div class="container-fluid">
+            <div class="fade-in">
+              <div class="card">
+                <div class="card-body">
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -37,7 +53,7 @@
     <td>
        <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-       @if($user->id == 1)
+       @if($user->id > 1)
         {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline','class'=>'delForm']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
@@ -51,4 +67,8 @@
 
 {!! $data->render() !!}
 
+	      </div>
+        </div>
+    </div>
+</div>
 @endsection

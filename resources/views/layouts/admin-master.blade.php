@@ -81,16 +81,7 @@
         <main class="c-main">
           @include('dashboard.shared.alert')
           
-          <div class="container-fluid">
-            <div class="fade-in">
-              <div class="card">
-                <!--<div class="card-header"> Dashboard</div>-->
-                <div class="card-body">
           @yield('content')
-                </div>
-              </div>
-            </div>
-          </div>
           
         </main>
         
@@ -106,7 +97,6 @@
     <!--<![endif]-->
     <!-- Plugins and scripts required by this view-->
     <!--<script src="/vendor/coreui/vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js"></script>
-    <script src="/vendor/coreui/vendors/@coreui/utils/js/coreui-utils.js"></script>
     <script src="/vendor/coreui/js/main.js"></script>-->
     <!-- jQuery -->
   <script src="/vendor/plugins/jquery/jquery.min.js"></script>
@@ -114,7 +104,7 @@
   
   <script type="text/javascript">
     $(document).ready(function() {
-      $(".delForm button[type=submit]").on('click', function(e){
+      $(".delForm button[type=submit], .delForm input[type=submit]").on('click', function(e){
           e.preventDefault();
           $.confirm({
   			    title: 'Confirm!',

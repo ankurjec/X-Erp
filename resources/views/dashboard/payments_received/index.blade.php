@@ -1,7 +1,22 @@
 @extends('layouts.admin-master')
 
+@section('breadcrumb')
+<div class="c-subheader px-3">
+          <!-- Breadcrumb-->
+          <ol class="breadcrumb border-0 m-0">
+            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+            <li class="breadcrumb-item active">Manage Payments Received</li>
+            <!-- Breadcrumb Menu-->
+          </ol>
+</div>
+@endsection
 
 @section('content')
+<div class="container-fluid">
+            <div class="fade-in">
+              <div class="card">
+                <div class="card-body">
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -20,14 +35,14 @@
         <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Details</th>
+            <th>Amount</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($payments_received as $payment_received)
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ $payment_received->from }}</td>
-	        <td>{{ $payment_received->details }}</td>
+	        <td>{{ $payment_received->amount }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('payments_received.destroy',$payment_received->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('payments_received.show',$payment_received->id) }}">Show</a>
@@ -50,5 +65,8 @@
 
     {!! $payments_received->links() !!}
     
-
+	      </div>
+        </div>
+    </div>
+</div>
 @endsection

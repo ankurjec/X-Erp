@@ -25,8 +25,12 @@
             </svg> Users
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('users.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Users</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('users.create') }}"><span class="c-sidebar-nav-icon"></span> Add User</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('users.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Users</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('users.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add User</a></li>
       </ul>
     </li>
     @endcan
@@ -39,8 +43,12 @@
             </svg> Role
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('roles.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Role</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('roles.create') }}"><span class="c-sidebar-nav-icon"></span> Add Role</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('roles.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Role</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('roles.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Role</a></li>
       </ul>
     </li>
     @endcan
@@ -53,8 +61,12 @@
             </svg> Projects
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('projects.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Projects</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('projects.create') }}"><span class="c-sidebar-nav-icon"></span> Add Project</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('projects.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Projects</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('projects.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Project</a></li>
       </ul>
     </li>
     @endcan
@@ -67,8 +79,12 @@
             </svg> Vendors
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('vendors.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Vendors</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('vendors.create') }}"><span class="c-sidebar-nav-icon"></span> Add Vendor</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('vendors.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Vendors</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('vendors.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Vendor</a></li>
       </ul>
     </li>
     @endcan
@@ -81,8 +97,12 @@
             </svg> Customers
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('customers.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Customers</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('customers.create') }}"><span class="c-sidebar-nav-icon"></span> Add Customer</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('customers.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Customers</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('customers.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Customer</a></li>
       </ul>
     </li>
     @endcan
@@ -95,8 +115,12 @@
             </svg> Expenses
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('expenses.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Expenses</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('expenses.create') }}"><span class="c-sidebar-nav-icon"></span> Add Expense</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('expenses.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Expenses</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('expenses.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Expense</a></li>
       </ul>
     </li>
     @endcan
@@ -109,8 +133,12 @@
             </svg> Payments Received
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments_received.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Payments Received</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments_received.create') }}"><span class="c-sidebar-nav-icon"></span> Add Payments Received</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments_received.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Payments Received</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments_received.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Payments Received</a></li>
       </ul>
     </li>
     @endcan
@@ -123,8 +151,12 @@
             </svg> Payments Made
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Payments</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments.create') }}"><span class="c-sidebar-nav-icon"></span> Add Payments</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Payments</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('payments.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Payments</a></li>
       </ul>
     </li>
     @endcan
@@ -137,8 +169,12 @@
             </svg> Loans
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loans.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Loans</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loans.create') }}"><span class="c-sidebar-nav-icon"></span> Add Loans</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loans.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Loans</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loans.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Loans</a></li>
       </ul>
     </li>
     @endcan
@@ -151,8 +187,12 @@
             </svg> Loan Repayments
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Loan Repayments</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.create') }}"><span class="c-sidebar-nav-icon"></span> Add Loan Repayments</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Loan Repayments</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Loan Repayments</a></li>
       </ul>
     </li>
     @endcan
