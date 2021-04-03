@@ -188,7 +188,7 @@ console.log(@json($payments_received_array));
   var mainChart = new Chart(document.getElementById('main-chart'), {
   type: 'line',
   data: {
-    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     datasets: [{
       label: 'Expense',
       backgroundColor: coreui.Utils.hexToRgba(coreui.Utils.getStyle('--info'), 10),
