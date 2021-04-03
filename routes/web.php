@@ -11,6 +11,8 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PaymentsReceivedController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\LoanRepaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,5 +45,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('expenses', ExpenseController::class);
     Route::resource('payments_received', PaymentsReceivedController::class);
     Route::resource('payments', PaymentController::class);
+    Route::resource('loans', LoanController::class);
+    Route::resource('loan_repayments', LoanRepaymentController::class);
     
 });

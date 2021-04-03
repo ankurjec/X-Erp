@@ -129,6 +129,34 @@
     </li>
     @endcan
     
+    @can('loan-list')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-bank"></use>
+            </svg> Loans
+      </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loans.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Loans</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loans.create') }}"><span class="c-sidebar-nav-icon"></span> Add Loans</a></li>
+      </ul>
+    </li>
+    @endcan
+    
+    @can('loan-repayment-list')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-balance-scale"></use>
+            </svg> Loan Repayments
+      </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.index') }}"><span class="c-sidebar-nav-icon"></span> Manage Loan Repayments</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.create') }}"><span class="c-sidebar-nav-icon"></span> Add Loan Repayments</a></li>
+      </ul>
+    </li>
+    @endcan
+    
   </ul>
   
   <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
