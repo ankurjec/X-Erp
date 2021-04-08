@@ -7,6 +7,7 @@ use App\Models\Expense;
 use App\Models\Vendor;
 use App\Models\Customer;
 use App\Models\User;
+use App\Notifications\NewExpense;
 
 class ExpenseController extends Controller
 {
@@ -24,7 +25,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::latest()->paginate(10);
+        $expenses = Expense::latest()->with('vendor')->paginate(10);
         return view('dashboard.expenses.index',compact('expenses'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
@@ -51,7 +52,8 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'type' => 'required'
+            'type' => 'required',
+            'amount' => 'required'
         ]);
         
         $types = $request->input('type');
@@ -76,6 +78,9 @@ class ExpenseController extends Controller
     		    $expense->details = $request->input('details')[$key];
     		    $expense->project_id = get_project_id();
     		    $expense->save();
+    		    
+    		    $user = User::find(1);
+                $user->notify(new NewExpense($expense));
 		    }
     
         return redirect()->route('expenses.index')
@@ -121,11 +126,10 @@ class ExpenseController extends Controller
     {
         request()->validate([
             'type' => 'required',
-            'entity_type' => 'required',
             'amount' => 'required'
         ]);
     
-        $expense->update($request->all());
+        $expense->update(request()->except(['_method','_token','action']));
     
         return redirect()->route('expenses.index')
                         ->with('success','Expense updated successfully');

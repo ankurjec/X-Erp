@@ -33,14 +33,8 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>From:</strong>
-                {{ $payment_received->from }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
                 <strong>Customer:</strong>
-                {{ $payment_received->customer->name }}
+                {{ $payment_received->customer ? $payment_received->customer->name : 'Not Available' }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

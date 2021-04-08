@@ -34,7 +34,7 @@ class PaymentsReceivedController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'from' => 'required',
+            'customer_id' => 'required',
             'amount' => 'required'
         ]);
     
@@ -63,7 +63,7 @@ class PaymentsReceivedController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-            'from' => 'required',
+            'customer_id' => 'required',
             'amount' => 'required'
         ]);
     

@@ -101,7 +101,7 @@
     <!-- jQuery -->
   <script src="/vendor/plugins/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="{{ asset('/vendor/jquery-confirm/jquery-confirm.min.js?v=3.3.4') }}"></script>
-  
+  <script defer src="/vendor/fontawesome5/js/all.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
       $(".delForm button[type=submit], .delForm input[type=submit]").on('click', function(e){

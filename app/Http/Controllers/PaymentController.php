@@ -8,6 +8,7 @@ use App\Models\Expense;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Customer;
+use App\Notifications\NewPayment;
 
 class PaymentController extends Controller
 {
@@ -58,7 +59,15 @@ class PaymentController extends Controller
             'amount' => 'required',
         ]);
         
-        Payment::create($request->all());
+        $payment = Payment::create($request->all());
+        
+        foreach($payment->expense_ids as $expense_id) {
+            $expense = Expense::find($expense_id);
+            if($expense) {
+                $user = User::find($expense->createdby_user_id);
+                $user->notify(new NewPayment($payment,$expense_id));
+            }
+        }
     
         return redirect()->route('payments.index')
                         ->with('success','Payment created successfully.');
@@ -105,6 +114,14 @@ class PaymentController extends Controller
         ]);
     
         $payment->update($request->all());
+        
+        foreach($payment->expense_ids as $expense_id) {
+            $expense = Expense::find($expense_id);
+            if($expense) {
+                $user = User::find($expense->createdby_user_id);
+                $user->notify(new NewPayment($payment,$expense_id));
+            }
+        }
     
         return redirect()->route('payments.index')
                         ->with('success','Payment updated successfully');

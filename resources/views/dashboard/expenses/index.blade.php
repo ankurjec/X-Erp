@@ -33,15 +33,16 @@
 <div class="table100 ver1">
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+            <th>Id #</th>
             <th>Type</th>
             <th>Payee</th>
             <th>Amount</th>
+            <th>Total Paid <i class="fas fa-info-circle" title="This may include multiple expenses"></i></th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($expenses as $expense)
 	    <tr>
-	        <td>{{ ++$i }}</td>
+	        <td>{{ $expense->id }}</td>
 	        <td>{{ $expense->type_string }}</td>
 	        <td>
 	            @if($expense->type == 'general_expense')
@@ -53,6 +54,7 @@
 	            @endif
 	           </td>
 	        <td>{{ $expense->amount }}</td>
+	        <td>{{ $expense->total_paid }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('expenses.destroy',$expense->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('expenses.show',$expense->id) }}">Show</a>

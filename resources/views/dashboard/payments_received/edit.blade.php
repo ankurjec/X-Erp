@@ -38,12 +38,12 @@
          <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 
-		    <div class="col-xs-12 col-sm-12 col-md-12">
+		    <!--<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>From:</strong>
-		            <input type="text" name="from" class="form-control" placeholder="From" value="{{$payment_received->from}}">
+		            <input type="text" name="from" class="form-control" placeholder="From" value="">
 		        </div>
-		    </div>
+		    </div>-->
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Customer:</strong>

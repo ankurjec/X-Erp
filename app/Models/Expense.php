@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Payment;
 
 class Expense extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'type', 'entity_type', 'user_id', 'vendor_id', 'customer_id', 'employee_id', 'amount', 'details', 'project_id', 'createdby_user_id'
+    ];
     
     public function user()
     {
@@ -33,5 +38,11 @@ class Expense extends Model
 	    }elseif($this->type == 'refunds') {
 	        return "Refunds";
 	    }
+    }
+    
+    public function getTotalPaidAttribute()
+    {
+        return Payment::where('expense_ids','like','%"'.$this->id.'"%')
+                        ->sum('amount');
     }
 }
