@@ -46,4 +46,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('loans', LoanController::class);
     Route::resource('loan_repayments', LoanRepaymentController::class);
     
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
