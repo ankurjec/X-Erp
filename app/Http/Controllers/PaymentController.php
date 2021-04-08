@@ -115,13 +115,13 @@ class PaymentController extends Controller
     
         $payment->update($request->all());
         
-        foreach($payment->expense_ids as $expense_id) {
+        /*foreach($payment->expense_ids as $expense_id) {
             $expense = Expense::find($expense_id);
             if($expense) {
                 $user = User::find($expense->createdby_user_id);
                 $user->notify(new NewPayment($payment,$expense_id));
             }
-        }
+        }*/
     
         return redirect()->route('payments.index')
                         ->with('success','Payment updated successfully');
