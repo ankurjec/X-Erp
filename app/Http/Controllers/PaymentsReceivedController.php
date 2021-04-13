@@ -18,7 +18,7 @@ class PaymentsReceivedController extends Controller
     
     public function index()
     {
-        $payments_received = PaymentsReceived::latest()->paginate(10);
+        $payments_received = PaymentsReceived::with('customer')->latest()->paginate(10);
         return view('dashboard.payments_received.index',compact('payments_received'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }

@@ -46,11 +46,11 @@
 	        <td>{{ $expense->type_string }}</td>
 	        <td>
 	            @if($expense->type == 'general_expense')
-	            {{ $expense->user->name }}
+	            {{ $expense->user ? $expense->user->name : '' }}
 	            @elseif($expense->type == 'vendor_payment')
-	            {{ $expense->vendor->name }}
+	            {{ $expense->vendor ? $expense->vendor->name : '' }}
 	            @elseif($expense->type == 'refunds')
-	            {{ $expense->customer->name }}
+	            {{ $expense->customer ? $expense->customer->name : '' }}
 	            @endif
 	           </td>
 	        <td>{{ $expense->amount }}</td>
