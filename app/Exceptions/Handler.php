@@ -39,7 +39,7 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            if((app()->environment() == 'local')) {
+            if((app()->environment() == 'production')) {
                 $this->sendExceptionNotification($e);
             }
         });
