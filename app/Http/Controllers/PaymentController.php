@@ -39,7 +39,11 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $expenses = Expense::all();
+        $expenses = Expense::where(function ($query) {
+                                $query->where('paid_flag', 0)
+                                    ->orWhere('paid_flag', null);
+                            })
+                            ->get();
         $users = User::all();
         $vendors = Vendor::all();
         $customers = Customer::all();
@@ -64,6 +68,8 @@ class PaymentController extends Controller
         foreach($payment->expense_ids as $expense_id) {
             $expense = Expense::find($expense_id);
             if($expense) {
+                $expense->update(['paid_flag' => 1]);
+                
                 $user = User::find($expense->createdby_user_id);
                 $user->notify(new NewPayment($payment,$expense_id));
             }
@@ -92,7 +98,13 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        $expenses = Expense::all();
+        $expenses = Expense::where(function ($query) {
+                                $query->where('paid_flag', 0)
+                                    ->orWhere('paid_flag', null);
+                            })
+                            ->whereIn('id', $payment->expense_ids,'or')
+                            ->get();
+        
         $users = User::all();
         $vendors = Vendor::all();
         $customers = Customer::all();
@@ -115,13 +127,15 @@ class PaymentController extends Controller
     
         $payment->update($request->all());
         
-        /*foreach($payment->expense_ids as $expense_id) {
+        foreach($payment->expense_ids as $expense_id) {
             $expense = Expense::find($expense_id);
             if($expense) {
-                $user = User::find($expense->createdby_user_id);
-                $user->notify(new NewPayment($payment,$expense_id));
+                $expense->update(['paid_flag' => 1]);
+                
+                /*$user = User::find($expense->createdby_user_id);
+                $user->notify(new NewPayment($payment,$expense_id));*/
             }
-        }*/
+        }
     
         return redirect()->route('payments.index')
                         ->with('success','Payment updated successfully');

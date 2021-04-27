@@ -78,7 +78,7 @@
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Amount:</strong>
+		            <strong>Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="amount" class="form-control" placeholder="Amount">
 		        </div>
 		    </div>
@@ -94,19 +94,19 @@
 		 	
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>CGST Amount:</strong>
+		            <strong>CGST Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="cgst_amount" class="form-control" placeholder="CGST Amount">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>SGST Amount:</strong>
+		            <strong>SGST Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="sgst_amount" class="form-control" placeholder="SGST Amount">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>IGST Amount:</strong>
+		            <strong>IGST Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="igst_amount" class="form-control" placeholder="IGST Amount">
 		        </div>
 		    </div>

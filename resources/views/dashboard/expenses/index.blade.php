@@ -36,8 +36,9 @@
             <th>Id #</th>
             <th>Type</th>
             <th>Payee</th>
-            <th>Amount</th>
-            <th>Total Paid <i class="fas fa-info-circle" title="This may include multiple expenses"></i></th>
+            <th>Amount (Rs.)</th>
+            <th>Paid/Unpaid</th>
+            <!--<th>Total Paid (Rs.) <i class="fas fa-info-circle" title="This may include multiple expenses"></i></th>-->
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($expenses as $expense)
@@ -53,8 +54,8 @@
 	            {{ $expense->customer ? $expense->customer->name : '' }}
 	            @endif
 	           </td>
-	        <td>{{ $expense->amount }}</td>
-	        <td>{{ $expense->total_paid }}</td>
+	        <td>{{ moneyFormatIndia($expense->amount) }}</td>
+	        <td>{!! $expense->paid_flag ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-secondary">Unpaid</span>'!!}</td>
 	        <td>
                 <form class="delForm" action="{{ route('expenses.destroy',$expense->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('expenses.show',$expense->id) }}">Show</a>

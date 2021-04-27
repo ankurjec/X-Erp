@@ -107,7 +107,7 @@
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Amount:</strong>
+		            <strong>Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="amount" class="form-control" value="{{$payment->amount}}">
 		        </div>
 		    </div>

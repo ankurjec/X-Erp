@@ -21,7 +21,7 @@
                   <div class="card text-white bg-gradient-primary">
                     <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
                       <div>
-                        <div class="text-value-lg">Rs. {{$total_expense}}</div>
+                        <div class="text-value-lg">Rs. {{moneyFormatIndia($total_expense)}}</div>
                         <div>Total Expense</div>
                       </div>
                       <div class="btn-group">
@@ -43,7 +43,7 @@
                   <div class="card text-white bg-gradient-info">
                     <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
                       <div>
-                        <div class="text-value-lg">Rs. {{$total_payments_received}}</div>
+                        <div class="text-value-lg">Rs. {{moneyFormatIndia($total_payments_received)}}</div>
                         <div>Payments Received</div>
                       </div>
                       <div class="btn-group">
@@ -184,11 +184,16 @@
   @parent
 <script src="/vendor/coreui/vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js"></script>
 <script type="text/javascript">
-console.log(@json($payments_received_array));
+<?php
+$max_range = max(count($expense_array),count($payments_received_array),count($loans_array));
+if($max_range<10) {$max_range = 10;}
+$label_values = range(0,$max_range); 
+?>
+console.log(@json($label_values));
   var mainChart = new Chart(document.getElementById('main-chart'), {
   type: 'line',
   data: {
-    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+    labels: @json($label_values),
     datasets: [{
       label: 'Expense',
       backgroundColor: coreui.Utils.hexToRgba(coreui.Utils.getStyle('--info'), 10),

@@ -58,8 +58,8 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Amount:</strong>
-                {{ $payment_received->amount }}
+                <strong>Amount (Rs.):</strong>
+                {{ moneyFormatIndia($payment_received->amount) }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -70,19 +70,19 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>CGST Amount:</strong>
+                <strong>CGST Amount (Rs.):</strong>
                 {{ $payment_received->cgst_amount }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>SGST Amount:</strong>
+                <strong>SGST Amount (Rs.):</strong>
                 {{ $payment_received->sgst_amount }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>IGST Amount:</strong>
+                <strong>IGST Amount (Rs.):</strong>
                 {{ $payment_received->igst_amount }}
             </div>
         </div>

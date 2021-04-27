@@ -35,14 +35,14 @@
         <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Amount</th>
+            <th>Amount (Rs.)</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($payments_received as $payment_received)
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ $payment_received->customer ? $payment_received->customer->name : 'Not Available' }}</td>
-	        <td>{{ $payment_received->amount }}</td>
+	        <td>{{ moneyFormatIndia($payment_received->amount) }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('payments_received.destroy',$payment_received->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('payments_received.show',$payment_received->id) }}">Show</a>

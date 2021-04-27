@@ -86,7 +86,7 @@
 		    
 		    <div class="col-xs-2 col-sm-2 col-md-2">
 		        <div class="form-group">
-		            <strong>Amount:</strong>
+		            <strong>Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="amount" class="form-control" placeholder="Amount" value="{{$expense->amount}}">
 		        </div>
 		    </div>
@@ -96,6 +96,15 @@
 		            <strong>Detail:</strong>
 		            <textarea class="form-control" name="details" placeholder="Detail">{!!$expense->details!!}</textarea>
 		        </div>
+		    </div>
+		    
+		    <div class="col-xs-4 col-sm-4 col-md-4">
+		        <div class="form-check">
+                  <input name="paid_flag" class="form-check-input" type="checkbox" value="" id="paid_flag">
+                  <label class="form-check-label" for="paid_flag">
+                    Paid
+                  </label>
+                </div>
 		    </div>
 		    
 		    

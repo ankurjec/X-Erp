@@ -81,8 +81,8 @@
 		    
 		    <div class="col-xs-2 col-sm-2 col-md-2">
 		        <div class="form-group">
-		            <strong>Amount:</strong>
-		            <input type="text" name="amount" class="form-control" placeholder="Amount" value="{{$expense->amount}}" readonly>
+		            <strong>Amount (Rs.):</strong>
+		            <input type="text" name="amount" class="form-control" placeholder="Amount" value="{{moneyFormatIndia($expense->amount)}}" readonly>
 		        </div>
 		    </div>
 		    

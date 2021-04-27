@@ -93,7 +93,7 @@
 		    
 		    <div class="col-xs-2 col-sm-2 col-md-2">
 		        <div class="form-group">
-		            <strong>Amount:</strong>
+		            <strong>Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="amount[]" class="form-control" placeholder="Amount">
 		        </div>
 		    </div>

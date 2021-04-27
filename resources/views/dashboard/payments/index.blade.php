@@ -35,7 +35,7 @@
         <tr>
             <th>No</th>
             <th>Expense Ids</th>
-            <th>Amount</th>
+            <th>Amount (Rs.)</th>
             <th>Payment Date</th>
             <th width="280px">Action</th>
         </tr>
@@ -43,7 +43,7 @@
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ json_encode($payment->expense_ids,true) }}</td>
-	        <td>{{ $payment->amount }}</td>
+	        <td>{{ moneyFormatIndia($payment->amount) }}</td>
 	        <td>{{ $payment->payment_date->format('d M Y') }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('payments.destroy',$payment->id) }}" method="POST">

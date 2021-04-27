@@ -73,8 +73,8 @@
         @endif
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Amount:</strong>
-                {{ $payment->amount }}
+                <strong>Amount (Rs.):</strong>
+                {{ moneyFormatIndia($payment->amount) }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

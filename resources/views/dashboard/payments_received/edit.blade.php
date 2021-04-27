@@ -79,7 +79,7 @@
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Amount:</strong>
+		            <strong>Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="amount" class="form-control" placeholder="Amount" value="{{$payment_received->amount}}">
 		        </div>
 		    </div>
@@ -95,19 +95,19 @@
 		 	
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>CGST Amount:</strong>
+		            <strong>CGST Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="cgst_amount" class="form-control" placeholder="CGST Amount" value="{{$payment_received->cgst_amount}}">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>SGST Amount:</strong>
+		            <strong>SGST Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="sgst_amount" class="form-control" placeholder="SGST Amount" value="{{$payment_received->sgst_amount}}">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>IGST Amount:</strong>
+		            <strong>IGST Amount (Rs.):</strong>
 		            <input type="number" min="1" step="0.01" name="igst_amount" class="form-control" placeholder="IGST Amount" value="{{$payment_received->igst_amount}}">
 		        </div>
 		    </div>
