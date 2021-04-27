@@ -100,7 +100,7 @@
 		    
 		    <div class="col-xs-4 col-sm-4 col-md-4">
 		        <div class="form-check">
-                  <input name="paid_flag" class="form-check-input" type="checkbox" value="" id="paid_flag">
+                  <input name="paid_flag" class="form-check-input" type="checkbox" value="1" id="paid_flag" @if($expense->paid_flag) checked="checked" @endif>
                   <label class="form-check-label" for="paid_flag">
                     Paid
                   </label>
