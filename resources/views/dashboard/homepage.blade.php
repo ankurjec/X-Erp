@@ -164,7 +164,7 @@
                       </div>
                     </div>-->
                     <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                      <div class="text-muted">Profit & Loss (Available)</div><strong>Rs. {{$profit_loss}}</strong>
+                      <div class="text-muted">Profit & Loss (Available)</div><strong>Rs. {{moneyFormatIndia($profit_loss)}}</strong>
                       <!--<div class="progress progress-xs mt-2">
                         <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>-->
