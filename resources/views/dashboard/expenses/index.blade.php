@@ -38,6 +38,7 @@
             <th>Payee</th>
             <th>Amount (Rs.)</th>
             <th>Paid/Unpaid</th>
+            <th>Order</th>
             <!--<th>Total Paid (Rs.) <i class="fas fa-info-circle" title="This may include multiple expenses"></i></th>-->
             <th width="280px">Action</th>
         </tr>
@@ -56,6 +57,11 @@
 	           </td>
 	        <td>{{ moneyFormatIndia($expense->amount) }}</td>
 	        <td>{!! $expense->paid_flag ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-secondary">Unpaid</span>'!!}</td>
+	        <td>
+	            @if($expense->order)
+	            #{{ $expense->order->id }}-{{ substr($expense->order->name,0,20) }}
+	            @endif
+	       </td>
 	        <td>
                 <form class="delForm" action="{{ route('expenses.destroy',$expense->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('expenses.show',$expense->id) }}">Show</a>

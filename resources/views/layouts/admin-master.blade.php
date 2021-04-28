@@ -65,6 +65,10 @@
       .table100.ver1 .ps__rail-y .ps__thumb-y::before { background-color: #cccccc;}
       .img-responsive{margin-left: auto;margin-right: auto;}
       .table100.ver1 .table {margin-bottom:0}
+      
+      .c-show>.c-sidebar-nav-dropdown-toggle {
+        background: #321fdb;
+      }
     </style>
     @section('style')
     @show

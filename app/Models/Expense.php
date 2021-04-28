@@ -11,7 +11,7 @@ class Expense extends Model
     use HasFactory;
     
     protected $fillable = [
-        'type', 'entity_type', 'user_id', 'vendor_id', 'customer_id', 'employee_id', 'amount', 'details', 'project_id', 'createdby_user_id', 'paid_flag'
+        'type', 'entity_type', 'user_id', 'vendor_id', 'customer_id', 'employee_id', 'amount', 'details', 'project_id', 'createdby_user_id', 'paid_flag', 'order_id'
     ];
     
     public function user()
@@ -27,6 +27,11 @@ class Expense extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+    
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
     
     public function getTypeStringAttribute()

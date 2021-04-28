@@ -38,12 +38,17 @@
          <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 
-		    <!--<div class="col-xs-12 col-sm-12 col-md-12">
+		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>From:</strong>
-		            <input type="text" name="from" class="form-control" placeholder="From" value="">
+		            <strong>Order:</strong>
+		            <select name="order_id" class="form-control">
+		                <option value="" disabled selected="selected">Select</option>
+		                @foreach($orders as $order)
+    		                <option value="{{$order->id}}" @if($payment_received->order_id == $order->id) selected="selected" @endif>#{{$order->id}}-{{substr($order->name,0,20)}}</option>
+		                @endforeach
+		            </select>
 		        </div>
-		    </div>-->
+		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Customer:</strong>

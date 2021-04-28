@@ -33,6 +33,16 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Order:</strong>
+                @if($payment_received->order)
+	            #{{ $payment_received->order->id }} - {{ $payment_received->order->name }}
+	            @else
+	            NA
+	            @endif
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Customer:</strong>
                 {{ $payment_received->customer ? $payment_received->customer->name : 'Not Available' }}
             </div>

@@ -92,6 +92,27 @@
 		            <textarea class="form-control" name="details" placeholder="Detail" readonly>{!!$expense->details!!}</textarea>
 		        </div>
 		    </div>
+		    
+		    <div class="col-xs-3 col-sm-3 col-md-3">
+		        <div class="form-group">
+		            <strong>Order:</strong>
+		            <select name="order_id" class="form-control" disabled="true">
+		                <option value="" disabled selected="selected">Select</option>
+		                @foreach($orders as $order)
+    		                <option value="{{$order->id}}" @if($expense->order_id == $order->id) selected="selected" @endif>#{{$order->id}}-{{substr($order->name,0,20)}}</option>
+		                @endforeach
+		            </select>
+		        </div>
+		    </div>
+		    
+		    <div class="col-xs-4 col-sm-4 col-md-4">
+		        <div class="form-check">
+                  <input disabled="true" name="paid_flag" class="form-check-input" type="checkbox" value="1" id="paid_flag" @if($expense->paid_flag) checked="checked" @endif>
+                  <label class="form-check-label" for="paid_flag">
+                    Paid
+                  </label>
+                </div>
+		    </div>
 		</div>
 
 	      </div>

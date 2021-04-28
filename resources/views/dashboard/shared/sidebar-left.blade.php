@@ -107,6 +107,24 @@
     </li>
     @endcan
     
+    @can('order-list')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-briefcase"></use>
+            </svg> Orders
+      </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('orders.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Orders</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('orders.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Order</a></li>
+      </ul>
+    </li>
+    @endcan
+    
     @can('expense-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
       <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">

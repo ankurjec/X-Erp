@@ -13,6 +13,7 @@ use App\Http\Controllers\PaymentsReceivedController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LoanRepaymentController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('payments', PaymentController::class);
     Route::resource('loans', LoanController::class);
     Route::resource('loan_repayments', LoanRepaymentController::class);
+    Route::resource('orders', OrderController::class);
     
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });

@@ -8,6 +8,7 @@ use App\Models\Vendor;
 use App\Models\Customer;
 use App\Models\User;
 use App\Notifications\NewExpense;
+use App\Models\Order;
 
 class ExpenseController extends Controller
 {
@@ -25,7 +26,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::latest()->with('vendor')->paginate(10);
+        $expenses = Expense::with('vendor')->with('order')->latest()->paginate(10);
         return view('dashboard.expenses.index',compact('expenses'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
@@ -40,7 +41,13 @@ class ExpenseController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
-        return view('dashboard.expenses.create',compact('customers','vendors','users'));
+        $orders = Order::where(function($query){
+                            $query->where('order_status','!=','completed')
+                                ->where('order_status','!=','cancelled');
+                        })
+                        ->get();
+            
+        return view('dashboard.expenses.create',compact('customers','vendors','users','orders'));
     }
 
     /**
@@ -98,7 +105,12 @@ class ExpenseController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
-        return view('dashboard.expenses.show',compact('expense','customers','vendors','users'));
+        $orders = Order::where(function($query){
+                            $query->where('order_status','!=','completed')
+                                ->where('order_status','!=','cancelled');
+                        })
+                        ->get();
+        return view('dashboard.expenses.show',compact('expense','customers','vendors','users','orders'));
     }
 
     /**
@@ -112,7 +124,12 @@ class ExpenseController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
-        return view('dashboard.expenses.edit',compact('expense','customers','vendors','users'));
+        $orders = Order::where(function($query){
+                            $query->where('order_status','!=','completed')
+                                ->where('order_status','!=','cancelled');
+                        })
+                        ->get();
+        return view('dashboard.expenses.edit',compact('expense','customers','vendors','users','orders'));
     }
 
     /**

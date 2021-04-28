@@ -5,7 +5,7 @@
           <!-- Breadcrumb-->
           <ol class="breadcrumb border-0 m-0">
             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-            <li class="breadcrumb-item active">Manage Payments Received</li>
+            <li class="breadcrumb-item active">Manage Orders</li>
             <!-- Breadcrumb Menu-->
           </ol>
 </div>
@@ -16,15 +16,15 @@
             <div class="fade-in">
               <div class="card">
                 <div class="card-body">
-
+ 
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Payments Received</h2>
+                <h2>Orders</h2>
             </div>
             <div class="pull-right">
-                @can('payments-received-create')
-                <a class="btn btn-success" href="{{ route('payments_received.create') }}"> New Payments Received</a>
+                @can('order-create')
+                <a class="btn btn-success" href="{{ route('orders.create') }}"> New Order</a>
                 @endcan
             </div>
         </div>
@@ -35,31 +35,31 @@
         <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Amount (Rs.)</th>
-            <th>Order</th>
+            <th>Status</th>
+            <th>Total Received</th>
+            <th>Total Expense</th>
+            <th>Profit/Loss</th>
             <th width="280px">Action</th>
         </tr>
-	    @foreach ($payments_received as $payment_received)
+	    @foreach ($orders as $order)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ $payment_received->customer ? $payment_received->customer->name : 'Not Available' }}</td>
-	        <td>{{ moneyFormatIndia($payment_received->amount) }}</td>
+	        <td>{{ $order->name }}</td>
+	        <td>{{ $order->order_status }}</td>
+	        <td>{{ moneyFormatIndia($order->total_received) }}</td>
+	        <td>{{ moneyFormatIndia($order->total_expense) }}</td>
+	        <td>{{ moneyFormatIndia($order->balance) }}</td>
 	        <td>
-	            @if($payment_received->order)
-	            #{{ $payment_received->order->id }}-{{ substr($payment_received->order->name,0,20) }}
-	            @endif
-	       </td>
-	        <td>
-                <form class="delForm" action="{{ route('payments_received.destroy',$payment_received->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('payments_received.show',$payment_received->id) }}">Show</a>
-                    @can('payments-received-edit')
-                    <a class="btn btn-primary" href="{{ route('payments_received.edit',$payment_received->id) }}">Edit</a>
+                <form class="delForm" action="{{ route('orders.destroy',$order->id) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('orders.show',$order->id) }}">Show</a>
+                    @can('order-edit')
+                    <a class="btn btn-primary" href="{{ route('orders.edit',$order->id) }}">Edit</a>
                     @endcan
 
 
                     @csrf
                     @method('DELETE')
-                    @can('payments-received-delete')
+                    @can('order-delete')
                     <button type="submit" class="btn btn-danger">Delete</button>
                     @endcan
                 </form>
@@ -69,10 +69,11 @@
     </table>
     </div>
 
-    {!! $payments_received->links() !!}
-    
+    {!! $orders->links() !!}
+
 	      </div>
         </div>
     </div>
-</div>
+</div>    
+
 @endsection

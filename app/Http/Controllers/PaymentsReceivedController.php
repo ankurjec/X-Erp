@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PaymentsReceived;
 use App\Models\Customer;
+use App\Models\Order;
 
 class PaymentsReceivedController extends Controller
 {
@@ -18,7 +19,7 @@ class PaymentsReceivedController extends Controller
     
     public function index()
     {
-        $payments_received = PaymentsReceived::with('customer')->latest()->paginate(10);
+        $payments_received = PaymentsReceived::with('customer')->with('order')->latest()->paginate(10);
         return view('dashboard.payments_received.index',compact('payments_received'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
@@ -27,7 +28,12 @@ class PaymentsReceivedController extends Controller
     public function create()
     {
         $customers = Customer::all();
-        return view('dashboard.payments_received.create',compact('customers'));
+        $orders = Order::where(function($query){
+                            $query->where('order_status','!=','completed')
+                                ->where('order_status','!=','cancelled');
+                        })
+                        ->get();
+        return view('dashboard.payments_received.create',compact('customers','orders'));
     }
     
     
@@ -48,7 +54,12 @@ class PaymentsReceivedController extends Controller
     public function show($id)
     {
         $payment_received = PaymentsReceived::find($id);
-        return view('dashboard.payments_received.show',compact('payment_received'));
+        $orders = Order::where(function($query){
+                            $query->where('order_status','!=','completed')
+                                ->where('order_status','!=','cancelled');
+                        })
+                        ->get();
+        return view('dashboard.payments_received.show',compact('payment_received','orders'));
     }
     
     
@@ -56,7 +67,12 @@ class PaymentsReceivedController extends Controller
     {
         $customers = Customer::all();
         $payment_received = PaymentsReceived::find($id);
-        return view('dashboard.payments_received.edit',compact('payment_received','customers'));
+        $orders = Order::where(function($query){
+                            $query->where('order_status','!=','completed')
+                                ->where('order_status','!=','cancelled');
+                        })
+                        ->get();
+        return view('dashboard.payments_received.edit',compact('payment_received','customers','orders'));
     }
     
     
