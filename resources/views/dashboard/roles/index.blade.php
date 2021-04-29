@@ -31,7 +31,7 @@
 </div>
 
 <div class="table100 ver1">
-<table class="table table-bordered">
+<table class="table table-bordered table-striped table-condensed table-responsive">
   <tr>
      <th>No</th>
      <th>Name</th>

@@ -19,7 +19,7 @@
     
     @can('user-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
             </svg> Users
@@ -37,7 +37,7 @@
     
     @can('role-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
             </svg> Role
@@ -55,7 +55,7 @@
     
     @can('project-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-playlist-add"></use>
             </svg> Projects
@@ -73,7 +73,7 @@
     
     @can('vendor-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-industry"></use>
             </svg> Vendors
@@ -91,7 +91,7 @@
     
     @can('customer-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-address-book"></use>
             </svg> Customers
@@ -109,7 +109,7 @@
     
     @can('order-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-briefcase"></use>
             </svg> Orders
@@ -127,7 +127,7 @@
     
     @can('expense-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-money"></use>
             </svg> Expenses
@@ -145,7 +145,7 @@
     
     @can('payments-received-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-dollar"></use>
             </svg> Payments Received
@@ -163,7 +163,7 @@
     
     @can('payment-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-grid"></use>
             </svg> Payments Made
@@ -181,7 +181,7 @@
     
     @can('loan-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-bank"></use>
             </svg> Loans
@@ -199,7 +199,7 @@
     
     @can('loan-repayment-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-balance-scale"></use>
             </svg> Loan Repayments
