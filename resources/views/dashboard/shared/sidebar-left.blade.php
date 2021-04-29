@@ -6,7 +6,7 @@
         <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
           <use xlink:href="/vendor/coreui/assets/brand/coreui.svg#signet"></use>
         </svg>-->
-        <h3>{{env('APP_NAME')}}</h3>
+        <h3>{{config('settings.app_name')}}</h3>
   </div>
   <ul class="c-sidebar-nav">
     <li class="c-sidebar-nav-item">

@@ -5,7 +5,7 @@
           </svg>
         </button>
         <a class="c-header-brand d-lg-none" href="#">
-          <h3>{{env('APP_NAME')}}</h3>
+          <h3>{{config('settings.app_name')}}</h3>
           <!--<svg width="118" height="46" alt="{{env('APP_NAME')}} Logo">
             <use xlink:href="/vendor/coreui/assets/brand/coreui.svg#full"></use>
           </svg>-->
