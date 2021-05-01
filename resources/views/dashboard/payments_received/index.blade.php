@@ -19,10 +19,10 @@
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
+            <div class="float-left">
                 <h2>Payments Received</h2>
             </div>
-            <div class="pull-right">
+            <div class="float-right">
                 @can('payments-received-create')
                 <a class="btn btn-success" href="{{ route('payments_received.create') }}"> New Payments Received</a>
                 @endcan
@@ -31,7 +31,7 @@
     </div>
 
     <div class="table100 ver1">
-    <table class="table table-bordered table-striped table-condensed table-responsive">
+    <table class="table table-bordered table-striped table-condensed table-responsive-sm">
         <tr>
             <th>No</th>
             <th>Name</th>
