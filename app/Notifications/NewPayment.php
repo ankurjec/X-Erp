@@ -48,7 +48,7 @@ class NewPayment extends Notification
         
         return (new MailMessage)
                     ->subject('X-Erp Payment Done for #'.$this->expense_id)
-                    ->greeting('Hi!')
+                    ->greeting('Hi! '.$notifiable->name)
                     ->line('Payment of Rs. '.$this->payment->amount.' done for Expense id #'.$this->expense_id)
                     ->action('View Payment Details', $url)
                     ->line('Thank you!');

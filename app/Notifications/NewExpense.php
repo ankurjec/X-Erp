@@ -46,7 +46,7 @@ class NewExpense extends Notification
         
         return (new MailMessage)
                     ->subject('X-Erp New Expense (#'.$this->expense->id.')')
-                    ->greeting('Hi!')
+                    ->greeting('Hi! '.$notifiable->name)
                     ->line('New Expense of Rs. '.$this->expense->amount.'(#'.$this->expense->id.') added to system.')
                     ->action('View Expense', $url)
                     ->line('Thank you!');
