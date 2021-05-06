@@ -87,7 +87,11 @@ class ExpenseController extends Controller
     		    $expense->save();
     		    
     		    $user = User::find(1);
-                $user->notify(new NewExpense($expense));
+    		    try {
+                    $user->notify(new NewExpense($expense));
+    		    } catch (\Exception $e) {
+                    \Log::error($e->getMessage());
+                }
 		    }
     
         return redirect()->route('expenses.index')

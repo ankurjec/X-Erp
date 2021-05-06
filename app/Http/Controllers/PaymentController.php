@@ -71,7 +71,11 @@ class PaymentController extends Controller
                 $expense->update(['paid_flag' => 1]);
                 
                 $user = User::find($expense->createdby_user_id);
-                $user->notify(new NewPayment($payment,$expense_id));
+                try {
+                    $user->notify(new NewPayment($payment,$expense_id));
+                } catch (\Exception $e) {
+                    \Log::error($e->getMessage());
+                }
             }
         }
     
