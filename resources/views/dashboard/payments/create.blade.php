@@ -53,7 +53,7 @@
 		    
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Paid to Name:</strong>
+		            <strong>Paid to Account Name:</strong>
 		            <input type="text" name="paid_to_name" class="form-control">
 		        </div>
 		    </div>
@@ -62,7 +62,7 @@
 		            <strong>Paid to Entity:</strong>
 		            <select name="paid_entity" class="form-control entity_type_select">
 		                <option value="" disabled selected="selected">Select</option>
-		                <option value="user">User</option>
+		                <!--<option value="user">User</option>-->
 		                <option value="vendor">Vendor</option>
 		                <option value="customer">Customer</option>
 		            </select>
@@ -125,8 +125,8 @@
 		    
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Detail:</strong>
-		            <textarea class="form-control" style="height:150px" name="details" placeholder="Detail"></textarea>
+		            <strong>Notes:</strong>
+		            <textarea class="form-control" style="height:150px" name="details" placeholder="Notes"></textarea>
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
