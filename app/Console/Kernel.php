@@ -28,13 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:run --only-db --disable-notifications')
             // ->daily()->at('02:00')
             ->dailyAt('02:00')
-            ->sendOutputTo('storage/logs/backup.log')
-            ->before(function(){
-                \Log::info('Commencing Database backup');
-            })
-            ->after(function(){
-                \Log::info('Database backup complete');
-            });
+            ->sendOutputTo('storage/logs/backup.log');
     }
 
     /**

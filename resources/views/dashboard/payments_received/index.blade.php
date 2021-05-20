@@ -34,6 +34,7 @@
     <table class="table table-bordered table-striped table-condensed table-responsive-sm">
         <tr>
             <th>No</th>
+            <th>Date</th>
             <th>Name</th>
             <th>Amount (Rs.)</th>
             <th>Order</th>
@@ -42,6 +43,7 @@
 	    @foreach ($payments_received as $payment_received)
 	    <tr>
 	        <td>{{ ++$i }}</td>
+	        <td>{{ $payment_received->received_date->format('d M Y') }}</td>
 	        <td>{{ $payment_received->customer ? $payment_received->customer->name : 'Not Available' }}</td>
 	        <td>{{ moneyFormatIndia($payment_received->amount) }}</td>
 	        <td>

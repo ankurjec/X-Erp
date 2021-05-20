@@ -15,6 +15,10 @@ class PaymentsReceived extends Model
         'from', 'customer_id', 'received_date', 'mode', 'amount', 'cgst_amount', 'sgst_amount', 'igst_amount', 'details', 'reference_no', 'invoice_no', 'gst_no', 'place_of_supply', 'full_partial_advance', 'project_id', 'order_id'
     ];
     
+    protected $casts = [
+        'received_date' => 'datetime'
+    ];
+    
     public function customer()
     {
         return $this->belongsTo(Customer::class);

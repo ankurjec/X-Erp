@@ -69,6 +69,9 @@
       .c-show>.c-sidebar-nav-dropdown-toggle {
         background: #321fdb;
       }
+      .c-sidebar-nav-dropdown-items {
+        background: #90a4ae;
+      }
     </style>
     @section('style')
     @show
