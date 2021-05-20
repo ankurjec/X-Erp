@@ -38,6 +38,7 @@
             <th>Name</th>
             <th>Amount (Rs.)</th>
             <th>Order</th>
+            <th>Invoice No</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($payments_received as $payment_received)
@@ -51,6 +52,7 @@
 	            #{{ $payment_received->order->id }}-{{ substr($payment_received->order->name,0,20) }}
 	            @endif
 	       </td>
+	       <td>{{ $payment_received->invoice_no }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('payments_received.destroy',$payment_received->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('payments_received.show',$payment_received->id) }}">Show</a>
