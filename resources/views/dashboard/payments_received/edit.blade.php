@@ -63,7 +63,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Received Date:</strong>
-		            <input type="date" name="received_date" class="form-control" placeholder="Received Date" value="{{$payment_received->received_date->format('Y-m-d')}}">
+		            <input type="date" name="received_date" class="form-control" placeholder="Received Date" value="{{$payment_received->received_date ? $payment_received->received_date->format('Y-m-d') : ''}}">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
