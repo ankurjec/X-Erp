@@ -59,7 +59,7 @@ class Handler extends ExceptionHandler
             
             Notification::route('slack', config('settings.slack_hook'))
                     ->notify(new ErrorNotification($exception_array));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             dd($e);
         }
     }

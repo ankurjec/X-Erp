@@ -12,6 +12,7 @@ class ErrorNotification extends Notification
 {
     use Queueable;
 
+    public $exception_array;
     /**
      * Create a new notification instance.
      *

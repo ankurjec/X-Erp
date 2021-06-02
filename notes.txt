@@ -4,3 +4,11 @@ php artisan make:controller OrderController
 
 php artisan make:seeder PermissionTableSeeder6
 php artisan db:seed --class=PermissionTableSeeder6
+
+
+//Larastan
+./vendor/bin/phpstan analyse
+OR
+./vendor/bin/phpstan analyse --memory-limit=2G
+
+//https://github.com/icodestuff-io/website
