@@ -112,6 +112,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $(".delForm button[type=submit], .delForm input[type=submit]").on('click', function(e){
+          var $this = $(this).closest('.delForm');
           e.preventDefault();
           $.confirm({
   			    title: 'Confirm!',
@@ -121,7 +122,7 @@
   			            text: 'Delete',
   			            btnClass: 'btn-danger',
   			            action: function(){
-  			                $(".delForm").submit();
+  			                $this.submit();
   			                return true;
   			            }
   			        },

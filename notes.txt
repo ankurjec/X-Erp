@@ -12,3 +12,6 @@ OR
 ./vendor/bin/phpstan analyse --memory-limit=2G
 
 //https://github.com/icodestuff-io/website
+
+php vendor/bin/phpstan analyse
+php vendor/bin/envoy run deploy

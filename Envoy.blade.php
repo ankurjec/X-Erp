@@ -2,12 +2,17 @@
 
 @story('deploy')
     update-code
-    install-dependencies
+    run-migrations
 @endstory
 
 @task('update-code')
     cd /var/www/html/xerp
     git pull origin master
+@endtask
+
+@task('run-migrations')
+    cd /var/www/html/xerp
+    php artisan migrate --force
 @endtask
 
 @task('install-dependencies')
