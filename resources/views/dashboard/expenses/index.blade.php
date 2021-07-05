@@ -39,6 +39,7 @@
             <th>Amount (Rs.)</th>
             <th>Paid/Unpaid</th>
             <th>Order</th>
+            <th>Date</th>
             <!--<th>Total Paid (Rs.) <i class="fas fa-info-circle" title="This may include multiple expenses"></i></th>-->
             <th width="280px">Action</th>
         </tr>
@@ -62,14 +63,20 @@
 	            #{{ $expense->order->id }}-{{ substr($expense->order->name,0,20) }}
 	            @endif
 	       </td>
+	       <td>
+	           {{ $expense->created_at->format('d M Y') }}
+	       </td>
 	        <td>
                 <form class="delForm" action="{{ route('expenses.destroy',$expense->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('expenses.show',$expense->id) }}">Show</a>
                     @can('expense-edit')
                     <a class="btn btn-primary" href="{{ route('expenses.edit',$expense->id) }}">Edit</a>
                     @endcan
-
-
+                    
+                    @if(!$expense->paid_flag)
+                    <a class="btn btn-success" href="payments/create?expense_id={{$expense->id}}" title="Add Payment Made">Add Payment</a>
+                    @endif
+                    
                     @csrf
                     @method('DELETE')
                     @can('expense-delete')

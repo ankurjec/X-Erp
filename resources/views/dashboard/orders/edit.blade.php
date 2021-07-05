@@ -56,9 +56,11 @@
 		                <option value="sent_quotation" @if($order->order_status == 'sent_quotation') selected="selected" @endif>Sent Quotation</option>
 		                <option value="sampling" @if($order->order_status == 'sampling') selected="selected" @endif>Sampling</option>
 		                <option value="production_start" @if($order->order_status == 'production_start') selected="selected" @endif>Production Start</option>
+		                <option value="shipped" @if($order->order_status == 'shipped') selected="selected" @endif>Shipped</option>
 		                <option value="delivered" @if($order->order_status == 'delivered') selected="selected" @endif>Delivered</option>
 		                <option value="completed" @if($order->order_status == 'completed') selected="selected" @endif>Completed with Payment</option>
 		                <option value="cancelled" @if($order->order_status == 'cancelled') selected="selected" @endif>Cancelled</option>
+		                <option value="dispute" @if($order->order_status == 'dispute') selected="selected" @endif>Dispute</option>
 		            </select>
 		        </div>
 		    </div>

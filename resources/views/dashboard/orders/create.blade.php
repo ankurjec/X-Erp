@@ -55,9 +55,11 @@
 		                <option value="sent_quotation">Sent Quotation</option>
 		                <option value="sampling">Sampling</option>
 		                <option value="production_start">Production Start</option>
+		                <option value="shipped">Shipped</option>
 		                <option value="delivered">Delivered</option>
 		                <option value="completed">Completed with Payment</option>
 		                <option value="cancelled">Cancelled</option>
+		                <option value="dispute">Dispute</option>
 		            </select>
 		        </div>
 		    </div>

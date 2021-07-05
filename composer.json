@@ -16,6 +16,7 @@
         "laravel/slack-notification-channel": "^2.3",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.2",
+        "league/flysystem": "1.1.4",
         "livewire/livewire": "^2.0",
         "rap2hpoutre/laravel-log-viewer": "^1.7",
         "spatie/laravel-backup": "^6.15",

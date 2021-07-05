@@ -150,6 +150,12 @@
 <script src="/vendor/bootstrap4-multiselect/js/BsMultiSelect.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+      
+      @if(Request::get('expense_id'))
+        console.log({{Request::get('expense_id')}});
+        $('#expense_ids').val({{Request::get('expense_id')}});
+      @endif
+      
        $(document).on('change','.entity_type_select',function(e){
            var $this = $(this);
            var user_id_select = $this.closest('.row').find('.user_id_select');

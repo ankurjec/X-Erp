@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Payment;
 
 class Expense extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     
     protected $fillable = [
         'type', 'entity_type', 'user_id', 'vendor_id', 'customer_id', 'employee_id', 'amount', 'details', 'project_id', 'createdby_user_id', 'paid_flag', 'order_id'
