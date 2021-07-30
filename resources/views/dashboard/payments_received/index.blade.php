@@ -56,11 +56,13 @@
 	       <td>{{ $payment_received->invoice_no }}</td>
 	       <td>
 	            @if($payment_received->full_partial_advance == 'advance')
-	                <span class="badge badge-default">Advance</span>
+	                <span class="badge badge-info">Advance</span>
 	            @elseif($payment_received->full_partial_advance == 'partial')
-	                <span class="badge badge-default">Partial</span>
+	                <span class="badge badge-info">Partial</span>
 	            @elseif($payment_received->full_partial_advance == 'full')
 	                <span class="badge badge-success">Full Paid</span>
+	           @else
+	               <span class="badge badge-secondary">N/A</span>
 	            @endif
 	       </td>
 	        <td>
