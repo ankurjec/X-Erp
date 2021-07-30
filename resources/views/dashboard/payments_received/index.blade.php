@@ -39,6 +39,7 @@
             <th>Amount (Rs.)</th>
             <th>Order</th>
             <th>Invoice No</th>
+            <th>Full / Partial / Advance</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($payments_received as $payment_received)
@@ -53,6 +54,15 @@
 	            @endif
 	       </td>
 	       <td>{{ $payment_received->invoice_no }}</td>
+	       <td>
+	            @if($payment_received->full_partial_advance == 'advance')
+	                <span class="badge badge-default">Advance</span>
+	            @elseif($payment_received->full_partial_advance == 'partial')
+	                <span class="badge badge-default">Partial</span>
+	            @elseif($payment_received->full_partial_advance == 'full')
+	                <span class="badge badge-success">Full Paid</span>
+	            @endif
+	       </td>
 	        <td>
                 <form class="delForm" action="{{ route('payments_received.destroy',$payment_received->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('payments_received.show',$payment_received->id) }}">Show</a>
