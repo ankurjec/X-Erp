@@ -3,6 +3,8 @@
 @section('style')
 	@parent
 <link rel="stylesheet" href="/vendor/bootstrap4-multiselect/css/BsMultiSelect.min.css">
+<link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
+<link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.min.css">
 @endsection
 
 @section('breadcrumb')
@@ -73,7 +75,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12 user_id_select_box" style="display:none">
 		        <div class="form-group">
 		            <strong>User:</strong>
-		            <select name="user_id" class="form-control user_id_select">
+		            <select name="user_id" class="form-control user_id_select select2">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($users as $user)
     		                @if($user->id > 1)
@@ -86,7 +88,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12 vendor_id_select_box" style="display:none">
 		        <div class="form-group">
 		            <strong>Vendor:</strong>
-		            <select name="vendor_id" class="form-control vendor_id_select">
+		            <select name="vendor_id" class="form-control vendor_id_select select2">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($vendors as $vendor)
 		                <option value="{{$vendor->id}}" @if($payment->vendor_id == $vendor->id) selected="selected" @endif>{{$vendor->name}}</option>
@@ -97,7 +99,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12 customer_id_select_box" style="display:none">
 		        <div class="form-group">
 		            <strong>Customer:</strong>
-		            <select name="customer_id" class="form-control customer_id_select">
+		            <select name="customer_id" class="form-control customer_id_select select2">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($customers as $customer)
 		                <option value="{{$customer->id}}" @if($payment->customer_id == $customer->id) selected="selected" @endif>{{$customer->name}}</option>
@@ -149,6 +151,7 @@
     @parent
 <script src="/js/popper.min.js"></script>
 <script src="/vendor/bootstrap4-multiselect/js/BsMultiSelect.min.js"></script>
+<script src="/vendor/select2/js/select2.full.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
        $(document).on('change','.entity_type_select',function(e){
@@ -286,6 +289,10 @@
       opacity: '.65'
     }
   }
+});
+
+$('.select2').select2({
+  theme: 'bootstrap4'
 });
 
     });

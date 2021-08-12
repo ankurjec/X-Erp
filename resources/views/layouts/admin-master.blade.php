@@ -42,7 +42,7 @@
       .table100-body { max-height: 585px; overflow: auto;}
       /*==================================================================[ Ver1 ]*/
       .table100.ver1 th { font-family: Lato-Bold; font-size: 18px; color: #fff; line-height: 1.4; background-color: #607d8b;}
-      .table100.ver1 td { font-family: Lato-Regular; font-size: 15px; color: #808080; line-height: 1.4;}
+      .table100.ver1 td { font-family: Lato-Regular; font-size: 15px; color: #000000; line-height: 1.4;}
       .table100.ver1 .table100-body tr:nth-child(even) { background-color: #f8f6ff;}
       /*---------------------------------------------*/
       .table100.ver1 { overflow: hidden; box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);}

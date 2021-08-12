@@ -13,7 +13,7 @@ class Order extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
-        'name', 'detail', 'order_status', 'order_complete_flag', 'project_id'
+        'name', 'detail', 'order_status', 'order_complete_flag', 'project_id', 'total_order_value'
     ];
     
     public function getTotalReceivedAttribute()
@@ -31,5 +31,10 @@ class Order extends Model
     public function getBalanceAttribute()
     {
         return ($this->total_received - $this->total_expense);
+    }
+    
+    public function getTotalRemainingAttribute()
+    {
+        return ($this->total_order_value - $this->total_received);
     }
 }

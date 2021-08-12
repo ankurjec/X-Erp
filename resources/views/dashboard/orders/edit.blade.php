@@ -48,20 +48,28 @@
 		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{!!$order->detail!!}</textarea>
 		        </div>
 		    </div>
+		    <div class="col-xs-12 col-sm-12 col-md-12">
+		        <div class="form-group">
+		            <strong>Total Order Value:</strong>
+		            <input type="number" min="0" step="0.01" name="total_order_value" class="form-control" value="{{$order->total_order_value}}">
+		        </div>
+		    </div>
 		    <div class="col-xs-12 col-sm-6 col-md-4">
 		        <div class="form-group">
 		            <strong>Order Status:</strong>
-		            <select name="order_status" class="form-control">
-		                <option value="initial_requirements" @if($order->order_status == 'initial_requirements') selected="selected" @endif>Initial Requirements</option>
-		                <option value="sent_quotation" @if($order->order_status == 'sent_quotation') selected="selected" @endif>Sent Quotation</option>
-		                <option value="sampling" @if($order->order_status == 'sampling') selected="selected" @endif>Sampling</option>
-		                <option value="production_start" @if($order->order_status == 'production_start') selected="selected" @endif>Production Start</option>
-		                <option value="shipped" @if($order->order_status == 'shipped') selected="selected" @endif>Shipped</option>
-		                <option value="delivered" @if($order->order_status == 'delivered') selected="selected" @endif>Delivered</option>
-		                <option value="completed" @if($order->order_status == 'completed') selected="selected" @endif>Completed with Payment</option>
-		                <option value="cancelled" @if($order->order_status == 'cancelled') selected="selected" @endif>Cancelled</option>
-		                <option value="dispute" @if($order->order_status == 'dispute') selected="selected" @endif>Dispute</option>
-		            </select>
+		            <input list="status_list" name="order_status" class="form-control" value="{{$order->order_status}}">
+		            <datalist id="status_list">
+						<option value="Initial Requirements">
+						<option value="Sent Quotation">
+						<option value="Sampling">
+						<option value="Order Confirmed">
+						<option value="Order Inprocess">
+						<option value="Shipped">
+						<option value="Delivered">
+						<option value="Completed with Payment">
+						<option value="Cancelled">
+						<option value="Dispute">
+					</datalist>
 		        </div>
 		    </div>
 		    

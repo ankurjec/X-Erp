@@ -36,9 +36,11 @@
             <th>No</th>
             <th>Name</th>
             <th>Status</th>
-            <th>Total Received</th>
-            <th>Total Expense</th>
-            <th>Profit/Loss</th>
+            <th>Total Order Value (Rs.)</th>
+            <th>Total Received (Rs.)</th>
+            <th>Total Balance (Rs.)</th>
+            <th>Expenses (Rs.)</th>
+            <th>Profit/Loss (Rs.)</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($orders as $order)
@@ -62,7 +64,9 @@
 	            <span class="badge badge-secondary">{{ ucfirst($order->order_status) }}</span>
 	            @endif
 	        </td>
+	        <td>{{ moneyFormatIndia($order->total_order_value) }}</td>
 	        <td>{{ moneyFormatIndia($order->total_received) }}</td>
+	        <td>{{ moneyFormatIndia($order->total_remaining) }}</td>
 	        <td>{{ moneyFormatIndia($order->total_expense) }}</td>
 	        <td>{{ moneyFormatIndia($order->balance) }}</td>
 	        <td>

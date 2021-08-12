@@ -47,20 +47,28 @@
 		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
 		        </div>
 		    </div>
+		    <div class="col-xs-12 col-sm-12 col-md-12">
+		        <div class="form-group">
+		            <strong>Total Order Value:</strong>
+		            <input type="number" min="0" step="0.01" name="total_order_value" class="form-control">
+		        </div>
+		    </div>
 		    <div class="col-xs-12 col-sm-6 col-md-4">
 		        <div class="form-group">
 		            <strong>Order Status:</strong>
-		            <select name="order_status" class="form-control">
-		                <option value="initial_requirements">Initial Requirements</option>
-		                <option value="sent_quotation">Sent Quotation</option>
-		                <option value="sampling">Sampling</option>
-		                <option value="production_start">Production Start</option>
-		                <option value="shipped">Shipped</option>
-		                <option value="delivered">Delivered</option>
-		                <option value="completed">Completed with Payment</option>
-		                <option value="cancelled">Cancelled</option>
-		                <option value="dispute">Dispute</option>
-		            </select>
+		            <input list="status_list" name="order_status" class="form-control">
+		            <datalist id="status_list">
+						<option value="Initial Requirements">
+						<option value="Sent Quotation">
+						<option value="Sampling">
+						<option value="Order Confirmed">
+						<option value="Order Inprocess">
+						<option value="Shipped">
+						<option value="Delivered">
+						<option value="Completed with Payment">
+						<option value="Cancelled">
+						<option value="Dispute">
+					</datalist>
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">

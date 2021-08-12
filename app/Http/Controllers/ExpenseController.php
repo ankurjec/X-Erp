@@ -81,6 +81,7 @@ class ExpenseController extends Controller
     		    /*$expense->user_id = isset($request->input('user_id')[$key]) ? $request->input('user_id')[$key] : null;
     		    $expense->vendor_id = isset($request->input('vendor_id')[$key]) ? $request->input('vendor_id')[$key] : null;
     		    $expense->customer_id = isset($request->input('customer_id')[$key]) ? $request->input('customer_id')[$key] : null;*/
+    		    $expense->order_id = isset($request->input('order_id')[$key]) ? $request->input('order_id')[$key] : null;
     		    $expense->amount = $request->input('amount')[$key];
     		    $expense->details = $request->input('details')[$key];
     		    $expense->project_id = get_project_id();
