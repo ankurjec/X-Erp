@@ -12,8 +12,13 @@
 </div>
 @endsection
 
-@section('content')
 
+@section('style')
+  @parent
+<link rel="stylesheet" href="/vendor/daterangepicker/daterangepicker.css">
+@endsection
+
+@section('content')
           <div class="container-fluid">
             <div class="fade-in">
               <div class="row">
@@ -115,22 +120,15 @@
                       <!--<div class="small text-muted">September 2019</div>-->
                     </div>
                     <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                      <div class="btn-group btn-group-toggle mx-3" data-toggle="buttons">
-                        <label class="btn btn-outline-secondary">
-                          <input id="option1" type="radio" name="options" autocomplete="off"> Day
-                        </label>
-                        <label class="btn btn-outline-secondary active">
-                          <input id="option2" type="radio" name="options" autocomplete="off" checked=""> Month
-                        </label>
-                        <label class="btn btn-outline-secondary">
-                          <input id="option3" type="radio" name="options" autocomplete="off"> Year
-                        </label>
-                      </div>
-                      <button class="btn btn-primary" type="button">
+                      <div id="daterange" class="btn btn-default pull-right">
+                    	    <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;
+                    	    <span>Date Filter</span> <i class="fa fa-caret-down"></i>
+                    	</div>
+                      <!--<button class="btn btn-primary" type="button">
                         <svg class="c-icon">
                           <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-cloud-download"></use>
                         </svg>
-                      </button>
+                      </button>-->
                     </div>
                   </div>
                   <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
@@ -183,6 +181,8 @@
 @section('script')
   @parent
 <script src="/vendor/coreui/vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js"></script>
+<script defer="defer" src="/vendor/daterangepicker/moment.min.js"></script>
+<script defer="defer" src="/vendor/daterangepicker/daterangepicker.js"></script>
 <script type="text/javascript">
 <?php
 $max_range = max(count($expense_array),count($payments_received_array),count($loans_array));
@@ -249,6 +249,47 @@ console.log(@json($label_values));
       }
     }
   }
+});
+
+$(function() {
+
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+    
+    @if(app('request')->input('from') && app('request')->input('to'))
+    start = moment("{{app('request')->input('from')}}",'YYYY-MM-DD');
+    end = moment("{{app('request')->input('to')}}",'YYYY-MM-DD');
+    $('#daterange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    @endif
+    
+    function cb(start, end) {
+        var from = start.format('YYYY-MM-DD');
+        var to = end.format('YYYY-MM-DD');
+        var pageurl = '/dashboard';
+        var urlparams = {
+          'from' : from,
+          'to' : to
+        };
+        urlparams = jQuery.param(urlparams);
+        var url = pageurl + '?' + urlparams;
+        window.location.href = url;
+    }
+
+    $('#daterange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    /*cb(start, end);*/
+
 });
 </script>
 @endsection
