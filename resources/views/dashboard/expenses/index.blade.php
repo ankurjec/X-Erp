@@ -40,6 +40,7 @@
             <th>Paid/Unpaid</th>
             <th>Order</th>
             <th>Date</th>
+            <th>Details</th>
             <!--<th>Total Paid (Rs.) <i class="fas fa-info-circle" title="This may include multiple expenses"></i></th>-->
             <th width="280px">Action</th>
         </tr>
@@ -66,6 +67,7 @@
 	       <td>
 	           {{ $expense->created_at->format('d M Y') }}
 	       </td>
+	       <td>{{ $expense->details }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('expenses.destroy',$expense->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('expenses.show',$expense->id) }}">Show</a>
