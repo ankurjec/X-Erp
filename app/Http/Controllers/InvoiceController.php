@@ -63,6 +63,10 @@ class InvoiceController extends Controller
         $invoice->invoice_terms = $request->invoice_terms;
         $invoice->total_amount = $request->total_amount;
         $invoice->paid_amount = $request->paid_amount;
+        $invoice->name = $request->company_name;
+        $invoice->detail = $request->company_details;
+        $invoice->address = $request->company_address;
+        $invoice->gst = $request->gst_no;
         $invoice->save();
 
         $CompanyDetail = new CompanyDetail;
@@ -110,9 +114,10 @@ class InvoiceController extends Controller
         }
 
         public function show_particular_invoice($id){
-            
            
-              return view('invoice/particular_invoice');
+           // $item = DB::table('select item_name, description from items where id="'.$id.'"');
+            $item = Item::findOrFail($id);
+              return view('invoice/particular_invoice', compact('item'));
               }
    
 }

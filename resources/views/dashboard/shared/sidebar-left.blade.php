@@ -214,7 +214,21 @@
       </ul>
     </li>
     @endcan
-    
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
+        <svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-address-book"></use>
+            </svg> Invoice
+      </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('invoice.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Create Invoice</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('view-records') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> View All Invoices</a></li>
+      </ul>
+    </li>
   </ul>
   
   <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>

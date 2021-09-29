@@ -35,6 +35,10 @@ class CustomerController extends Controller
         request()->validate([
             'name' => 'required',
             'detail' => 'required',
+            'address' => 'required',
+            'gst' => 'required',
+
+
         ]);
     
         Customer::create($request->all());

@@ -13,6 +13,7 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Main styles for this application-->
     <link href="/vendor/coreui/css/style.css" rel="stylesheet">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <!--<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-118965717-3');gtag('config','UA-118965717-5');</script>-->
@@ -59,6 +60,7 @@
         background: #90a4ae;
       }
     </style>
+    @livewireStyles
     @section('style')
     @show
   </head>
@@ -82,6 +84,7 @@
         
       </div>
     </div>
+    @livewireScripts
     <!-- CoreUI and necessary plugins-->
     <script src="/vendor/coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
     <script src="/vendor/coreui/vendors/@coreui/utils/js/coreui-utils.js"></script>
