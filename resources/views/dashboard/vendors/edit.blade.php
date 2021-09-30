@@ -30,7 +30,7 @@
     </div>
 
 
-    <form action="{{ route('vendors.update',$vendor->id) }}" method="POST">
+    <form action="{{ route('vendors.update',$vendor->id) }}" method="POST" enctype="multipart/form-data">
     	@csrf
         @method('PUT')
 
@@ -48,6 +48,25 @@
 		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $vendor->detail }}</textarea>
 		        </div>
 		    </div>
+            {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+		        <div class="form-group">
+		            <strong>Old Document Name:</strong>
+		            <textarea class="form-control" style="height:150px"  placeholder="Detail">{{ $vendor->filename }}</textarea>
+		        </div>
+		    </div> --}}
+            <div class="col-xs-12 col-sm-12 col-md-12">
+		        <div class="form-group">
+            <img src="{{ asset('storage/'.$vendor->filename ) }}" width="300px" height="410px"  id="img" /><br><br>
+            <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove image</button></p>
+        </div>
+    </div>
+            <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                <label for="exampleFormControlFile1"><strong>Upload New Vendor Document:</strong></label>
+                <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple  oninput="image.src=window.URL.createObjectURL(this.files[0])">
+            </div>
+            <div id="image-holder" style="width: 300px;height:500px;" > </div>
+
+            
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 		      <button type="submit" class="btn btn-primary">Submit</button>
 		    </div>
@@ -55,10 +74,44 @@
 
 
     </form>
-
+    
 	      </div>
         </div>
     </div>
 </div>
 
+@endsection
+@section('script')
+<script>
+
+function remove_img(){
+   document.getElementById('img').remove();
+   document.getElementById('btn').remove();   
+}
+</script>
+
+<script>
+   $("#fileUpload").on('change', function () {
+
+if (typeof (FileReader) != "undefined") {
+
+    var image_holder = $("#image-holder");
+    image_holder.empty();
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("<img />", {
+            "src": e.target.result,
+            "class": "thumb-image",
+            "height": "300px"
+        }).appendTo(image_holder);
+
+    }
+    image_holder.show();
+    reader.readAsDataURL($(this)[0].files[0]);
+} else {
+    alert("This browser does not support FileReader.");
+}
+});
+</script>
 @endsection

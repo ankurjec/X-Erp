@@ -19,13 +19,15 @@
 
                         </div>
                         <input class="form-control" type="text" value="{{$cust ? $cust->detail: ''}}"
-                            placeholder="Company Detail"><br>
+                            placeholder="Company Detail" name="company_details"><br>
                     </p>
                 </div>
+                <input class="form-control" type="text" value="{{$customer->name}} "
+                placeholder="Company Detail" name="company_details"><br>
 
                 <!--<input class="form-control" type="text" name="company_details" placeholder="Company Details">--><br>
                 <input class="form-control" type="text" value="{{$cust ? $cust->address: ''}}"
-                    placeholder="Company Address"><br>
+                    placeholder="Company Address" name="company_address"><br>
                 <input class="form-control" type="text" value="{{$cust ? $cust->gst: ''}}" name="gst_no"
                     placeholder="Company GST"><br>
             </address>

@@ -65,6 +65,8 @@ class InvoiceController extends Controller
         $invoice->paid_amount = $request->paid_amount;
         $invoice->name = $request->company_name;
         $invoice->detail = $request->company_details;
+        //dd($request->customer_id);
+
         $invoice->address = $request->company_address;
         $invoice->gst = $request->gst_no;
         $invoice->save();
