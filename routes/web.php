@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PaymentsReceivedController;
 use App\Http\Controllers\PaymentController;
@@ -50,3 +51,16 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
+Route::resource('invoice', InvoiceController::class);
+//Route::get('/users', [UserController::class, 'index']);
+Route::get('view-records',[InvoiceController::class,'show_invoices'])->name('view-records');
+
+Route::get('/view-invoice/{id}',[InvoiceController::class,'show_particular_invoice'])->name('view-invoice');
+
+Route::resource('/dropdown', 'DropdownController');
+Route::get('/getStates/{id}', 'DropdownController@getCity'); // for get city list
+
+
+Route::get('/getDetail/{id}', 'DropdownController@getDetail'); // for get city list
+
+Route::get('/getStadiumDetail/{id}', 'DropdownController@getStadiumDetail'); // for get city list

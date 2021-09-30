@@ -46,6 +46,14 @@
 		            <strong>Detail:</strong>
 		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
 		        </div>
+                <div class="form-group">
+		            <strong>Address:</strong>
+		            <textarea class="form-control" style="height:150px" name="address" placeholder="Address"></textarea>
+		        </div>
+                <div class="form-group">
+		            <strong>GST:</strong>
+		            <textarea class="form-control" style="height:40px" name="gst" placeholder="GST"></textarea>
+		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 		            <button type="submit" class="btn btn-primary">Submit</button>

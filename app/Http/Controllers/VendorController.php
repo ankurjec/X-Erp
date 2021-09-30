@@ -35,13 +35,46 @@ class VendorController extends Controller
         request()->validate([
             'name' => 'required',
             'detail' => 'required',
+            'photos'=> 'required|max:5034|mimes:pdf,jpg,png,jpeg,txt',
         ]);
     
-        Vendor::create($request->all());
-    
+       
+        if($request->hasFile('photos')){
+            // dd($request->photos);
+   
+            $path = $request->file('photos')->store('uploads');
+
+       //return $path;
+        }
+        Vendor::create(['name' => request()->name,'detail'=> request()->detail, 'filename'=> $path,'project_id'=> request()->project_id ]);
         return redirect()->route('vendors.index')
                         ->with('success','Vendor created successfully.');
     }
+    
+//     public function store(Request $req){
+//         $req->validate([
+//             'name' => 'required',
+//            'detail' => 'required',
+//         'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
+//         ]);
+
+//         $vendorModel = new File;
+
+//         if($req->file()) {
+//             $fileName = time().'_'.$req->file->getClientOriginalName();
+//             $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
+
+//             $vendorModel->name = time().'_'.$req->file->getClientOriginalName();
+//             $vendorModel->file_path = '/storage/' . $filePath;
+//             $vendorModel->save();
+
+//             return back()
+//             ->with('success','File has been uploaded.')
+//             ->with('file', $fileName);
+//         }
+//    }
+
+
     
     
     public function show(Vendor $vendor)
@@ -61,13 +94,28 @@ class VendorController extends Controller
          request()->validate([
             'name' => 'required',
             'detail' => 'required',
+            'photos'=> 'required|max:5034|mimes:pdf,jpg,png,jpeg,txt',
+
         ]);
     
-        $vendor->update($request->all());
+    //     $vendor->update($request->all());
     
-        return redirect()->route('vendors.index')
-                        ->with('success','Vendor updated successfully');
+    //     return redirect()->route('vendors.index')
+    //                     ->with('success','Vendor updated successfully');
+    // }
+
+    
+    if($request->hasFile('photos')){
+        // dd($request->photos);
+
+        $path = $request->file('photos')->store('uploads');
+
+   //return $path;
     }
+    $vendor->update(['name' => request()->name,'detail'=> request()->detail, 'filename'=> $path ]);
+    return redirect()->route('vendors.index')
+                    ->with('success','Vendor Updated successfully.');
+}
     
     
     public function destroy(Vendor $vendor)
