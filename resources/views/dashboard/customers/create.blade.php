@@ -30,7 +30,7 @@
     </div>
 
 
-    <form action="{{ route('customers.store') }}" method="POST">
+    <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
     	@csrf
 		<input type="hidden" name="project_id" value="{{get_project_id()}}">
 
@@ -55,6 +55,14 @@
 		            <textarea class="form-control" style="height:40px" name="gst" placeholder="GST"></textarea>
 		        </div>
 		    </div>
+            <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                <label for="exampleFormControlFile1"><strong>Upload Vendor Document:</strong></label>
+                <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple
+                    oninput="image.src=window.URL.createObjectURL(this.files[0])">
+            </div>
+            <div id="image-holder" style="width: 300px;height:500px;"> 
+                
+            </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 		            <button type="submit" class="btn btn-primary">Submit</button>
 		    </div>
@@ -68,4 +76,33 @@
     </div>
 </div>
 
+@endsection
+@section('script')
+
+<script>
+    $("#fileUpload").on('change', function () {
+ 
+ if (typeof (FileReader) != "undefined") {
+ 
+     var image_holder = $("#image-holder");
+     image_holder.empty();
+ 
+     var reader = new FileReader();
+     reader.onload = function (e) {
+         $("<img />", {
+             "src": e.target.result,
+             "class": "thumb-image",
+             "height": "300px",
+         }).appendTo(image_holder);
+         ('#btn').appendTo(image_holder);
+
+ 
+     }
+     image_holder.show();
+     reader.readAsDataURL($(this)[0].files[0]);
+ } else {
+     alert("This browser does not support FileReader.");
+ }
+ });
+</script>
 @endsection

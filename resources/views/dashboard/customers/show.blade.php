@@ -55,9 +55,15 @@
                 {{ $customer->gst }}
             </div>
         </div>
-    </div>
-
-	      </div>
+       
+	      </div> @if($customer->filename === NULL)
+          <td>No Document Uploaded.</td>
+          @else
+          <td> <img src="{{ asset('storage/'.$customer->filename ) }}" width="600px" height="410px"
+                  id="img" /><br><br> </td>
+          @endif
+      </div>
+  
         </div>
     </div>
 </div>

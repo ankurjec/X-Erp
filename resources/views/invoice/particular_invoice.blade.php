@@ -15,7 +15,7 @@
         </ul>
     </div>
     @endif
-        <header>
+        <header >
             <h1 style="height:100px;">Invoice Details</h1>
             <address contenteditable>
                 <p>Jonathan Neal</p>
@@ -24,7 +24,7 @@
             </address>
             <span><img alt="" src="http://www.jonathantneal.com/examples/invoice/logo.png"><input type="file" accept="image/*"></span>
         </header>
-        <div>
+        <div id="content">
             <article>
                 <h1>Recipient</h1>
                 <form name="invoiceForm" method="POST" action="{{route('invoice.store')}}">
@@ -161,5 +161,29 @@
 
         <button type="submit" id="saveInvoice">Create</button>
         </form>
+        <button id="cmd">Generate PDF</button>
+        <div id="editor"></div>
 
+        @endsection
+
+        @section('js')
+
+        <script>
+              var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    $('#cmd').click(function () {
+        doc.fromHTML($('#content').html(), 25, 15, {
+            'width': 170,
+                'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });
+
+    // This code is collected but useful, click below to jsfiddle link.
+</script>
 @endsection

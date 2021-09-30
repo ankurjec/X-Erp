@@ -37,15 +37,28 @@ class CustomerController extends Controller
             'detail' => 'required',
             'address' => 'required',
             'gst' => 'required',
+            'photos'=> 'required|max:5034|mimes:pdf,jpg,png,jpeg,txt',
+
 
 
         ]);
     
-        Customer::create($request->all());
+    //     Customer::create($request->all());
     
-        return redirect()->route('customers.index')
-                        ->with('success','Customer created successfully.');
+    //     return redirect()->route('customers.index')
+    //                     ->with('success','Customer created successfully.');
+    // }
+    if($request->hasFile('photos')){
+        // dd($request->photos);
+
+        $path = $request->file('photos')->store('uploads');
+
+   //return $path;
     }
+    Customer::create(['name' => request()->name,'detail'=> request()->detail, 'address'=> request()->address, 'gst'=> request()->gst,'filename'=> $path,'project_id'=> request()->project_id ]);
+    return redirect()->route('customers.index')
+                    ->with('success','Customer created successfully.');
+}
     
     
     public function show(Customer $customer)

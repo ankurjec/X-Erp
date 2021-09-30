@@ -60,6 +60,27 @@
 		            <textarea class="form-control" style="height:40px" name="gst" placeholder="Detail">{{ $customer->gst }}</textarea>
 		        </div>
 		    </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    @if($customer->filename === NULL)
+                        <td>No Document Uploaded.</td>
+                        @else
+                        <td> <img src="{{ asset('storage/'.$customer->filename ) }}" width="600px" height="410px"
+                                id="img" /><br><br> </td>
+                                <td> <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove
+                                    image</button></p></td>
+                        @endif
+                   
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                <label for="exampleFormControlFile1"><strong>Upload New Vendor Document:</strong></label>
+                <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple
+                    oninput="image.src=window.URL.createObjectURL(this.files[0])">
+            </div>
+            <div id="image-holder" style="width: 300px;height:500px;"> </div>
+
+
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 		      <button type="submit" class="btn btn-primary">Submit</button>
 		    </div>
@@ -73,4 +94,37 @@
     </div>
 </div>
 
+@endsection
+@section('script')
+<script>
+    function remove_img(){
+   document.getElementById('img').remove();
+   document.getElementById('btn').remove();   
+}
+</script>
+
+<script>
+    $("#fileUpload").on('change', function () {
+
+if (typeof (FileReader) != "undefined") {
+
+    var image_holder = $("#image-holder");
+    image_holder.empty();
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("<img />", {
+            "src": e.target.result,
+            "class": "thumb-image",
+            "height": "300px"
+        }).appendTo(image_holder);
+
+    }
+    image_holder.show();
+    reader.readAsDataURL($(this)[0].files[0]);
+} else {
+    alert("This browser does not support FileReader.");
+}
+});
+</script>
 @endsection

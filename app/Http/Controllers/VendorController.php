@@ -42,7 +42,7 @@ class VendorController extends Controller
         if($request->hasFile('photos')){
             // dd($request->photos);
    
-            $path = $request->file('photos')->store('uploads');
+            $path = $request->file('photos')->store('uploads/vendor');
 
        //return $path;
         }

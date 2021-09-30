@@ -48,14 +48,17 @@
                                     placeholder="Detail"></textarea>
                             </div>
                         </div>
-                        
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12">
-                                <label for="exampleFormControlFile1"><strong>Upload Vendor Document:</strong></label>
-                                <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple oninput="image.src=window.URL.createObjectURL(this.files[0])">
-                            </div>
-                            <div id="image-holder" style="width: 300px;height:500px;" > </div>
 
-                        
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                            <label for="exampleFormControlFile1"><strong>Upload Vendor Document:</strong></label>
+                            <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple
+                                oninput="image.src=window.URL.createObjectURL(this.files[0])">
+                        </div>
+                        <div id="image-holder" style="width: 300px;height:500px;"> 
+                            
+                        </div>
+                       
+
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -73,7 +76,6 @@
 @section('script')
 
 <script>
-
     $("#fileUpload").on('change', function () {
  
  if (typeof (FileReader) != "undefined") {
@@ -86,8 +88,10 @@
          $("<img />", {
              "src": e.target.result,
              "class": "thumb-image",
-             "height": "300px"
+             "height": "300px",
          }).appendTo(image_holder);
+         ('#btn').appendTo(image_holder);
+
  
      }
      image_holder.show();
@@ -96,5 +100,5 @@
      alert("This browser does not support FileReader.");
  }
  });
- </script>
+</script>
 @endsection
