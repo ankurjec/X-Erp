@@ -14,7 +14,7 @@ class AddCustomerIdToItemsTable extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->unsignedBigInteger('customer_id');
+           $table->unsignedBigInteger('customer_id');
 
 
         });
@@ -27,8 +27,11 @@ class AddCustomerIdToItemsTable extends Migration
      */
     public function down()
     {
-        Schema::table('items', function (Blueprint $table) {
-            //
-        });
+        if (Schema::hasColumn('items', 'customer_id')) {
+            Schema::table('items', function (Blueprint $table) {
+                $table->dropColumn('customer_id');
+            });
+        }
+        
     }
 }
