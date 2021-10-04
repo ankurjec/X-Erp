@@ -35,21 +35,40 @@ class VendorController extends Controller
         request()->validate([
             'name' => 'required',
             'detail' => 'required',
-            'photos'=> 'required|max:5034|mimes:pdf,jpg,png,jpeg,txt',
+            //'photos.*'=> 'required|max:5034|mimes:pdf,PDF,jpg,png,jpeg,txt',
+            'photos.*' => 'required|mimes:pdf,xlx,csv,doc,docx,jpg,jpeg,png,txt|max:5034',
         ]);
     
        
         if($request->hasFile('photos')){
             // dd($request->photos);
-   
-            $path = $request->file('photos')->store('uploads/vendor');
+            $paths = '';
+            foreach($request->photos as $photo){
+                $path = $photo->store('uploads/vendor');
+                if(!$paths){
+                    $paths = $path;
+                }else{
+                    $paths = $paths.','.$path;
+                }
+            }
 
-       //return $path;
+     //  return $path;
         }
-        Vendor::create(['name' => request()->name,'detail'=> request()->detail, 'filename'=> $path,'project_id'=> request()->project_id ]);
+        Vendor::create(['name' => request()->name,'detail'=> request()->detail, 'filename'=> $paths,'project_id'=> request()->project_id ]);
         return redirect()->route('vendors.index')
                         ->with('success','Vendor created successfully.');
     }
+
+
+
+
+
+
+
+
+
+
+    
     
 //     public function store(Request $req){
 //         $req->validate([

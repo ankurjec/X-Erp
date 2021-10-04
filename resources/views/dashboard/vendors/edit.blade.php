@@ -56,17 +56,45 @@
 		            <textarea class="form-control" style="height:150px"  placeholder="Detail">{{ $vendor->filename }}</textarea>
                     </div>
             </div> --}}
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-12" id="img">
                 <div class="form-group">
                     @if($vendor->filename === NULL)
-                        <td>No Document Uploaded.</td>
+                    <td>No Document Uploaded.</td>
+                    @else
+                    <td class="p-2"> <?php                                               
+                            $files =explode(",",$vendor->filename);
+                            $files_show = [];
+                            foreach ($files as $file) {
+                                $images_extentions = array("jpg","JPG","jpeg","JPEG","png","PNG");
+                                $image_end_part = pathinfo($file, PATHINFO_EXTENSION);;
+                               
+                                if(in_array($image_end_part,$images_extentions ) == true){
+                                    $files_show[] = [
+                                        'file' => $file,
+                                        'type' => 'img'
+                                    ];
+                                }else{
+                                    $files_show[] = [
+                                        'file' => $file,
+                                        'type' => 'file'
+                                    ]; 
+                                }
+                            }
+                            ?>
+                        @foreach ($files_show as $item)
+                        @if($item['type'] == 'img')
+                        <img width="100%" src="{{asset('storage/'.$item['file'])}}" /> <br>
                         @else
-                        <td> <img src="{{ asset('storage/'.$vendor->filename ) }}" width="600px" height="410px"
-                                id="img" /><br><br> </td>
-                                <td> <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove
-                                    image</button></p></td>
+                       Link to View Document: <a href="{{asset('storage/'.$item['file'])}}">{{$item['file']}}</a> <br>
                         @endif
-                   
+                        @endforeach
+                    </td>
+                    <td>
+                        <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove
+                                File/Files</button></p>
+                    </td>
+                    @endif
+
                 </div>
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-md-12">
@@ -74,7 +102,7 @@
                 <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple
                     oninput="image.src=window.URL.createObjectURL(this.files[0])">
             </div>
-            <div id="image-holder" style="width: 300px;height:500px;"> </div>
+            {{-- <div id="image-holder" style="width: 300px;height:500px;"> </div> --}}
 
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
