@@ -36,20 +36,40 @@ class PaymentsReceivedController extends Controller
         return view('dashboard.payments_received.create',compact('customers','orders'));
     }
     
-    
     public function store(Request $request)
     {
         request()->validate([
             'customer_id' => 'required',
-            'amount' => 'required'
+            'amount' => 'required',
+            'photos.*' => 'required|mimes:pdf,xlx,csv,doc,docx,jpg,jpeg,png,txt|max:5034',
+
         ]);
     
-        PaymentsReceived::create($request->all());
+    //     PaymentsReceived::create($request->all());
     
-        return redirect()->route('payments_received.index')
-                        ->with('success','Payments received added successfully.');
+    //     return redirect()->route('payments_received.index')
+    //                     ->with('success','Payments received added successfully.');
+    // }
+    
+    if ($request->hasFile('photos')) {
+        //dd($request->photos);
+        $paths = '';
+        foreach ($request->photos as $photo) {
+            $path = $photo->store('uploads/payment_received');
+            if (!$paths) {
+                $paths = $path;
+            } else {
+                $paths = $paths . ',' . $path;
+            }
+        }
+
+        //  return $path;
     }
-    
+PaymentsReceived::create(['customer_id' => request()->customer_id, 'amount' => request()->amount, 'filename' => $paths, 'project_id' => request()->project_id]);
+return redirect()->route('payments_received.index')
+    ->with('success', 'Payment received  created successfully.');
+}
+
     
     public function show($id)
     {

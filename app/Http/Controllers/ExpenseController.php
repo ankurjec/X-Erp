@@ -14,10 +14,10 @@ class ExpenseController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:expense-list|expense-create|expense-edit|expense-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:expense-create', ['only' => ['create','store']]);
-         $this->middleware('permission:expense-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:expense-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:expense-list|expense-create|expense-edit|expense-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:expense-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:expense-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:expense-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -26,8 +26,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::with(['vendor','user'])->with('order')->latest()->paginate(10);
-        return view('dashboard.expenses.index',compact('expenses'))
+        $expenses = Expense::with(['vendor', 'user'])->with('order')->latest()->paginate(10);
+        return view('dashboard.expenses.index', compact('expenses'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -41,13 +41,13 @@ class ExpenseController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
-        $orders = Order::where(function($query){
-                            $query->where('order_status','!=','completed')
-                                ->where('order_status','!=','cancelled');
-                        })
-                        ->get();
-            
-        return view('dashboard.expenses.create',compact('customers','vendors','users','orders'));
+        $orders = Order::where(function ($query) {
+            $query->where('order_status', '!=', 'completed')
+                ->where('order_status', '!=', 'cancelled');
+        })
+            ->get();
+
+        return view('dashboard.expenses.create', compact('customers', 'vendors', 'users', 'orders'));
     }
 
     /**
@@ -60,44 +60,89 @@ class ExpenseController extends Controller
     {
         request()->validate([
             'type' => 'required',
-            'amount' => 'required'
+            'amount' => 'required',
+            'photos.*' => 'required|mimes:pdf,xlx,csv,doc,docx,jpg,jpeg,png,txt|max:5034',
+
         ]);
-        
+
         $types = $request->input('type');
-        
-        foreach($types as $key=>$type) {
-    		    $expense = new Expense;
-    		    $expense->createdby_user_id = $request->user()->id;
-    		    $expense->type = $request->input('type')[$key];
-    		    
-    		    if($request->input('type')[$key] == "general_expense") {
-    		        $expense->user_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
-    		    }else if($request->input('type')[$key] == "vendor_payment") {
-    		        $expense->vendor_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
-    		    } else if($request->input('type')[$key] == "refunds") {
-    		        $expense->customer_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
-    		    }
-    		    
-    		    /*$expense->user_id = isset($request->input('user_id')[$key]) ? $request->input('user_id')[$key] : null;
+        //  dd($request->photos);
+        foreach ($types as $key => $type) {
+            $expense = new Expense;
+            $expense->createdby_user_id = $request->user()->id;
+            $expense->type = $request->input('type')[$key];
+
+            if ($request->input('type')[$key] == "general_expense" && $request->hasFile('photos')) {
+                $expense->user_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
+            } else if ($request->input('type')[$key] == "vendor_payment" && $request->hasFile('photos')) {
+                $expense->vendor_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
+            } else if ($request->input('type')[$key] == "refunds" && $request->hasFile('photos')) {
+                $expense->customer_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
+            }
+
+            /*$expense->user_id = isset($request->input('user_id')[$key]) ? $request->input('user_id')[$key] : null;
     		    $expense->vendor_id = isset($request->input('vendor_id')[$key]) ? $request->input('vendor_id')[$key] : null;
     		    $expense->customer_id = isset($request->input('customer_id')[$key]) ? $request->input('customer_id')[$key] : null;*/
-    		    $expense->order_id = isset($request->input('order_id')[$key]) ? $request->input('order_id')[$key] : null;
-    		    $expense->amount = $request->input('amount')[$key];
-    		    $expense->details = $request->input('details')[$key];
-    		    $expense->project_id = get_project_id();
-    		    $expense->save();
-    		    
-    		    $user = User::find(1);
-    		    try {
-                    $user->notify(new NewExpense($expense));
-    		    } catch (\Exception $e) {
-                    \Log::error($e->getMessage());
+            $expense->order_id = isset($request->input('order_id')[$key]) ? $request->input('order_id')[$key] : null;
+            $expense->amount = $request->input('amount')[$key];
+            //$expense->details = $request->input('details')[$key];
+
+
+            // if($request->hasFile('photos')){
+            //     //         // dd($request->photos);
+
+            //         }
+            $photos_multiple = $request->photos;
+            if ($photos_multiple) {
+                $paths = '';
+                foreach ($photos_multiple as $photo) {
+                    $path = $photo->store('uploads/expenses');
+                    if (!$paths) {
+                        $paths = $path;
+                    } else {
+                        $paths = $paths . ',' . $path;
+                    }
                 }
-		    }
-    
+                $expense->filename = $path;
+            }
+
+
+
+
+            $expense->project_id = get_project_id();
+            $expense->save();
+
+            $user = User::find(1);
+            try {
+                $user->notify(new NewExpense($expense));
+            } catch (\Exception $e) {
+                \Log::error($e->getMessage());
+            }
+        }
+
         return redirect()->route('expenses.index')
-                        ->with('success','Expenses created successfully.');
+            ->with('success', 'Expenses created successfully.');
     }
+
+    //     if($request->hasFile('photos')){
+    //         // dd($request->photos);
+    //         $paths = '';
+    //         foreach($request->photos as $photo){
+    //             $path = $photo->store('uploads/expenses');
+    //             if(!$paths){
+    //                 $paths = $path;
+    //             }else{
+    //                 $paths = $paths.','.$path;
+    //             }
+    //         }
+
+    //  //  return $path;
+    //     }
+    //     Expense::create(['type' => request()->type,'amount'=> request()->detail, 'filename'=> $paths,'project_id'=> request()->project_id ]);
+    //     return redirect()->route('expenses.index')
+    //                     ->with('success','Expenses created successfully.');
+    // }
+
 
     /**
      * Display the specified resource.
@@ -110,12 +155,12 @@ class ExpenseController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
-        $orders = Order::where(function($query){
-                            $query->where('order_status','!=','completed')
-                                ->where('order_status','!=','cancelled');
-                        })
-                        ->get();
-        return view('dashboard.expenses.show',compact('expense','customers','vendors','users','orders'));
+        $orders = Order::where(function ($query) {
+            $query->where('order_status', '!=', 'completed')
+                ->where('order_status', '!=', 'cancelled');
+        })
+            ->get();
+        return view('dashboard.expenses.show', compact('expense', 'customers', 'vendors', 'users', 'orders'));
     }
 
     /**
@@ -129,12 +174,12 @@ class ExpenseController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
-        $orders = Order::where(function($query){
-                            $query->where('order_status','!=','completed')
-                                ->where('order_status','!=','cancelled');
-                        })
-                        ->get();
-        return view('dashboard.expenses.edit',compact('expense','customers','vendors','users','orders'));
+        $orders = Order::where(function ($query) {
+            $query->where('order_status', '!=', 'completed')
+                ->where('order_status', '!=', 'cancelled');
+        })
+            ->get();
+        return view('dashboard.expenses.edit', compact('expense', 'customers', 'vendors', 'users', 'orders'));
     }
 
     /**
@@ -150,11 +195,11 @@ class ExpenseController extends Controller
             'type' => 'required',
             'amount' => 'required'
         ]);
-    
-        $expense->update(request()->except(['_method','_token','action']));
-    
+
+        $expense->update(request()->except(['_method', '_token', 'action']));
+
         return redirect()->route('expenses.index')
-                        ->with('success','Expense updated successfully');
+            ->with('success', 'Expense updated successfully');
     }
 
     /**
@@ -166,8 +211,8 @@ class ExpenseController extends Controller
     public function destroy(Expense $expense)
     {
         $expense->delete();
-    
+
         return redirect()->route('expenses.index')
-                        ->with('success','Expense deleted successfully');
+            ->with('success', 'Expense deleted successfully');
     }
 }

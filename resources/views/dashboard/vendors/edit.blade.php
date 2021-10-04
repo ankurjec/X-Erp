@@ -90,6 +90,7 @@
                         @endforeach
                     </td>
                     <td>
+                        <br>
                         <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove
                                 File/Files</button></p>
                     </td>

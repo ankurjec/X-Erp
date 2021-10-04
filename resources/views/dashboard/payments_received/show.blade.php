@@ -123,8 +123,62 @@
         </div>
     </div>
 
-	      </div>
+	      {{-- </div>
         </div>
     </div>
+</div>
+@endsection --}}
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group">
+        <strong>Vendor Document:</strong>
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12" id="img">
+        <div class="form-group">
+            @if( ($files =explode(",",$payment_received->filename) === NULL))
+            <td>No Document Uploaded.</td>
+            @else
+            <td class="p-2"> <?php                                               
+                    $files =explode(",",$payment_received->filename);
+                    $files_show = [];
+                    foreach ($files as $file) {
+                        $images_extentions = array("jpg","JPG","jpeg","JPEG","png","PNG");
+                        $image_end_part = pathinfo($file, PATHINFO_EXTENSION);;
+                       
+                        if(in_array($image_end_part,$images_extentions ) == true){
+                            $files_show[] = [
+                                'file' => $file,
+                                'type' => 'img'
+                            ];
+                        }else{
+                            $files_show[] = [
+                                'file' => $file,
+                                'type' => 'file'
+                            ]; 
+                        }
+                    }
+                    ?>
+                @foreach ($files_show as $item)
+                @if($item['type'] == 'img')
+                <img width="100%" src="{{asset('storage/'.$item['file'])}}" /> <br>
+                @else
+                Link To View Document:  <a href="{{asset('storage/'.$item['file'])}}">{{$item['file']}}</a> <br>
+                @endif
+                @endforeach
+            </td>
+            <td>
+
+            </td>
+            @endif
+
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+</div>
+</div>
 </div>
 @endsection

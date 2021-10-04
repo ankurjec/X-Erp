@@ -56,18 +56,25 @@
 		        </div>
 		    </div>
             <div class="form-group col-xs-12 col-sm-12 col-md-12">
-                <label for="exampleFormControlFile1"><strong>Upload Vendor Document:</strong></label>
-                <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple
-                    oninput="image.src=window.URL.createObjectURL(this.files[0])">
-            </div>
-            <div id="image-holder" style="width: 300px;height:500px;"> 
-                
-            </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		            <button type="submit" class="btn btn-primary">Submit</button>
-		    </div>
-		</div>
+                <label for="exampleFormControlFile1"><strong>Upload Customer Document:</strong></label>
+                {{-- <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple
+                    oninput="image.src=window.URL.createObjectURL(this.files[0])"> --}}
+                    <input id="fileupload" type="file" name="photos[]" multiple="multiple" />
 
+            </div>
+            <div id="image-holder" style="width: 300px;height:500px;">
+                <div class="col-md-12" class="gallery">
+                    <div id="dvPreview">
+                        {{-- <td> <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove
+                            File/Files</button></p></td> --}}
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
 
     </form>
 

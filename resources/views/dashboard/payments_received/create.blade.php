@@ -30,7 +30,7 @@
     </div>
 
 
-    <form action="{{ route('payments_received.store') }}" method="POST">
+    <form action="{{ route('payments_received.store') }}" method="POST" enctype="multipart/form-data">
     	@csrf
 		<input type="hidden" name="project_id" value="{{get_project_id()}}">
 
@@ -155,10 +155,27 @@
 		        </div>
 		    </div>
 		  </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		            <button type="submit" class="btn btn-primary">Submit</button>
-		    </div>
+		  <div class="form-group col-xs-12 col-sm-12 col-md-12">
+			<label for="exampleFormControlFile1"><strong>Upload Payment Received Document:</strong></label>
+			{{-- <input type="file" class="form-control-file" id="fileUpload" name="photos[]" multiple
+			
+			  > --}}
+			<input id="fileupload" type="file" name="photos[]" multiple="multiple" />
+
 		</div>
+		<div id="image-holder" style="width: 300px;height:500px;">
+			<div class="col-md-12" class="gallery">
+				<div id="dvPreview">
+					{{-- <td> <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove
+						File/Files</button></p></td> --}}
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+		 </div>
 
 
     </form>
@@ -167,4 +184,34 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+
+<script>
+    $("#fileUpload").on('change', function () {
+ 
+ if (typeof (FileReader) != "undefined") {
+ 
+     var image_holder = $("#image-holder");
+     image_holder.empty();
+ 
+     var reader = new FileReader();
+     reader.onload = function (e) {
+         $("<img />", {
+             "src": e.target.result,
+             "class": "thumb-image",
+             "height": "300px",
+         }).appendTo(image_holder);
+         ('#btn').appendTo(image_holder);
+
+ 
+     }
+     image_holder.show();
+     reader.readAsDataURL($(this)[0].files[0]);
+ } else {
+     alert("This browser does not support FileReader.");
+ }
+ });
+</script>
 @endsection

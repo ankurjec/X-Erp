@@ -29,7 +29,7 @@
     </div>
 
 
-    <form action="{{ route('loans.store') }}" method="POST">
+    <form action="{{ route('loans.store') }}" method="POST" enctype="multipart/form-data">
     	@csrf
 		<input type="hidden" name="project_id" value="{{get_project_id()}}">
 
@@ -65,13 +65,31 @@
 		            <textarea class="form-control" style="height:150px" name="details" placeholder="Details"></textarea>
 		        </div>
 		    </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		            <button type="submit" class="btn btn-primary">Submit</button>
-		    </div>
-		</div>
-
-
-    </form>
+		    <div class="form-group col-xs-12 col-sm-12 col-md-12">
+				<label for="exampleFormControlFile1"><strong>Upload Loans Document:</strong></label>
+				{{-- <input type="file" class="form-control-file" id="fileUpload" name="photos[]" multiple
+				
+				  > --}}
+				<input id="fileupload" type="file" name="photos[]" multiple="multiple" />
+	
+			</div>
+			<div id="image-holder" style="width: 300px;height:500px;">
+				<div class="col-md-12" class="gallery">
+					<div id="dvPreview">
+						{{-- <td> <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove
+							File/Files</button></p></td> --}}
+					</div>
+				</div>
+	
+				<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+			 </div>
+	
+	
+		</form>
+	
 
 	      </div>
         </div>

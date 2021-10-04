@@ -60,7 +60,7 @@
 		            <textarea class="form-control" style="height:40px" name="gst" placeholder="Detail">{{ $customer->gst }}</textarea>
 		        </div>
 		    </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     @if($customer->filename === NULL)
                         <td>No Document Uploaded.</td>
@@ -124,6 +124,104 @@ if (typeof (FileReader) != "undefined") {
     reader.readAsDataURL($(this)[0].files[0]);
 } else {
     alert("This browser does not support FileReader.");
+}
+});
+</script>
+@endsection --}}
+
+<div class="col-xs-12 col-sm-12 col-md-12" id="img">
+    <div class="form-group">
+        @if($customer->filename === NULL)
+        <td>No Document Uploaded.</td>
+        @else
+        <td class="p-2"> <?php                                               
+                $files =explode(",",$customer->filename);
+                $files_show = [];
+                foreach ($files as $file) {
+                    $images_extentions = array("jpg","JPG","jpeg","JPEG","png","PNG");
+                    $image_end_part = pathinfo($file, PATHINFO_EXTENSION);;
+                   
+                    if(in_array($image_end_part,$images_extentions ) == true){
+                        $files_show[] = [
+                            'file' => $file,
+                            'type' => 'img'
+                        ];
+                    }else{
+                        $files_show[] = [
+                            'file' => $file,
+                            'type' => 'file'
+                        ]; 
+                    }
+                }
+                ?>
+            @foreach ($files_show as $item)
+            @if($item['type'] == 'img')
+            <img width="100%" src="{{asset('storage/'.$item['file'])}}" /> <br>
+            @else
+           Link to View Document: <a href="{{asset('storage/'.$item['file'])}}">{{$item['file']}}</a> <br>
+            @endif
+            @endforeach
+        </td>
+        <td>
+            <br>
+            <p><button onclick="remove_img()" type="button" id="btn" class="btn btn-danger"> Remove
+                    File/Files</button></p>
+        </td>
+        @endif
+
+    </div>
+</div>
+<div class="form-group col-xs-12 col-sm-12 col-md-12">
+    <label for="exampleFormControlFile1"><strong>Upload New Customer Document:</strong></label>
+    <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple
+        oninput="image.src=window.URL.createObjectURL(this.files[0])">
+</div>
+{{-- <div id="image-holder" style="width: 300px;height:500px;"> </div> --}}
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+
+
+</form>
+
+</div>
+</div>
+</div>
+</div>
+
+@endsection
+@section('script')
+<script>
+function remove_img(){
+document.getElementById('img').remove();
+document.getElementById('btn').remove();   
+}
+</script>
+
+<script>
+$("#fileUpload").on('change', function () {
+
+if (typeof (FileReader) != "undefined") {
+
+var image_holder = $("#image-holder");
+image_holder.empty();
+
+var reader = new FileReader();
+reader.onload = function (e) {
+$("<img />", {
+"src": e.target.result,
+"class": "thumb-image",
+"height": "300px"
+}).appendTo(image_holder);
+
+}
+image_holder.show();
+reader.readAsDataURL($(this)[0].files[0]);
+} else {
+alert("This browser does not support FileReader.");
 }
 });
 </script>

@@ -52,11 +52,34 @@ class LoanRepaymentController extends Controller
             'amount' => 'required',
         ]);
         
-        LoanRepayment::create($request->all());
+    //     LoanRepayment::create($request->all());
     
-        return redirect()->route('loan_repayments.index')
-                        ->with('success','LoanRepayment Repayment created successfully.');
+    //     return redirect()->route('loan_repayments.index')
+    //                     ->with('success','LoanRepayment Repayment created successfully.');
+    // }
+
+ 
+    if($request->hasFile('photos')){
+        // dd($request->photos);
+        $paths = '';
+        foreach($request->photos as $photo){
+            $path = $photo->store('uploads/loan_repayment');
+            if(!$paths){
+                $paths = $path;
+            }else{
+                $paths = $paths.','.$path;
+            }
+        }
+
+ //  return $path;
     }
+    LoanRepayment::create(['loan_id' => request()->loan_id,'amount'=> request()->amount, 'filename'=> $paths,'project_id'=> request()->project_id ]);
+    return redirect()->route('loan_repayments.index')
+                    ->with('success','Vendor created successfully.');
+}
+
+
+
     
     /**
      * Display the specified resource.
