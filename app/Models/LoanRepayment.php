@@ -13,9 +13,10 @@ class LoanRepayment extends Model
     protected $table = 'loan_repayment';
     
     protected $fillable = [
-        'loan_id', 'amount', 'repayment_date', 'details', 'project_id'
+        'loan_id', 'amount', 'repayment_date', 'details', 'project_id', 'filename'
     ];
-    
+    protected $with = ['loan'];
+
     public function loan()
     {
         return $this->belongsTo(Loan::class);

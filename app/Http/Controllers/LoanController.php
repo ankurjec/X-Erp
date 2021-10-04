@@ -23,7 +23,7 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loans = Loan::latest()->paginate(5);
+        $loans = Loan::latest()->with('user')->paginate(5);
         return view('dashboard.loans.index',compact('loans'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -50,14 +50,29 @@ class LoanController extends Controller
         request()->validate([
             'user_id' => 'required',
             'amount' => 'required',
+            'photos.*' => 'required|mimes:pdf,xlx,csv,doc,docx,jpg,jpeg,png,txt|max:5034',
+
         ]);
         
-        Loan::create($request->all());
-    
-        return redirect()->route('loans.index')
-                        ->with('success','Loan created successfully.');
+    if ($request->hasFile('photos')) {
+        // dd($request->photos);
+        $paths = '';
+        foreach ($request->photos as $photo) {
+            $path = $photo->store('uploads/loans');
+            if (!$paths) {
+                $paths = $path;
+            } else {
+                $paths = $paths . ',' . $path;
+            }
+        }
+
+        //  return $path;
     }
-    
+    Loan::create(['user_id' => request()->user_id, 'amount' => request()->amount, 'filename' => $paths, 'project_id' => request()->project_id]);
+    return redirect()->route('loans.index')
+        ->with('success', 'Loan created successfully.');
+}
+
     /**
      * Display the specified resource.
      *

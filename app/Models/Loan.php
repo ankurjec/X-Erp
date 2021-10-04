@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Loan extends Model
 {
     use HasFactory, SoftDeletes;
-    
+
     protected $fillable = [
-        'user_id', 'amount', 'received_date', 'details', 'project_id'
+        'user_id', 'amount', 'received_date', 'details', 'project_id', 'filename',
     ];
-    
+
+    protected $with = ['user'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
