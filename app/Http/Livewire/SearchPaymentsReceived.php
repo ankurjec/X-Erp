@@ -50,7 +50,7 @@ if ($this->search) {
 
 $query->with('customer', 'order');
 return view('livewire.search-payments-received', [
-    'payments_received' => $query->paginate(10),
+    'payments_received' => $query->latest()->paginate(10),
 ]);
 }
 }

@@ -33,9 +33,9 @@ class SearchExpenses extends Component
             });
         }
 
-        $query->with('user', 'vendor', 'order');
+        $query->with(['user', 'vendor', 'order']);
         return view('livewire.search-expenses', [
-            'expenses' => $query->paginate(10),
+            'expenses' => $query->latest()->paginate(10)
         ]);
     }
 }

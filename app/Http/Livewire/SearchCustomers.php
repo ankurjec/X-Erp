@@ -24,7 +24,7 @@ class SearchCustomers extends Component
             $query->where('name', 'like', '%' . $this->search . '%');
         }
         return view('livewire.search-customers', [
-            'customers' => $query->paginate(10),
+            'customers' => $query->latest()->paginate(10),
         ]);
     }
 }

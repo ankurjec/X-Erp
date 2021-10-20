@@ -25,7 +25,7 @@ class SearchOrders extends Component
             $query->where('name', 'like', '%' . $this->search . '%');
         }
         return view('livewire.search-orders', [
-            'orders' => $query->paginate(10),
+            'orders' => $query->latest()->paginate(10),
         ]);
     }
 }

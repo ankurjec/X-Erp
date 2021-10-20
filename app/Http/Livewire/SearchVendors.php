@@ -25,7 +25,7 @@ class SearchVendors extends Component
               $query->where('name', 'like', '%' . $this->search . '%');
           }
           return view('livewire.search-vendors', [
-              'vendors' => $query->paginate(10),
+              'vendors' => $query->latest()->paginate(10),
           ]);
       }
   }
