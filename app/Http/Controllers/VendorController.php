@@ -37,7 +37,7 @@ class VendorController extends Controller
             'detail' => 'required'
         ]);
     
-       
+        $path = '';
         if($request->hasFile('photos')){
             // dd($request->photos);
    
@@ -102,7 +102,7 @@ class VendorController extends Controller
     //                     ->with('success','Vendor updated successfully');
     // }
 
-    
+    $path = '';
     if($request->hasFile('photos')){
         // dd($request->photos);
 
