@@ -53,7 +53,6 @@
                                 <label for="exampleFormControlFile1"><strong>Upload Vendor Document:</strong></label>
                                 <input type="file" class="form-control-file" id="fileUpload" name="photos" multiple oninput="image.src=window.URL.createObjectURL(this.files[0])">
                             </div>
-                            <div id="image-holder" style="width: 300px;height:500px;" > </div>
 
                         
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
