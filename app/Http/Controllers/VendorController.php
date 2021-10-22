@@ -34,8 +34,7 @@ class VendorController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'detail' => 'required',
-            'photos'=> 'required|max:5034|mimes:pdf,jpg,png,jpeg,txt',
+            'detail' => 'required'
         ]);
     
        
@@ -93,8 +92,7 @@ class VendorController extends Controller
     {
          request()->validate([
             'name' => 'required',
-            'detail' => 'required',
-            'photos'=> 'required|max:5034|mimes:pdf,jpg,png,jpeg,txt',
+            'detail' => 'required'
 
         ]);
     
