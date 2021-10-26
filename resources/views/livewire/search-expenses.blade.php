@@ -22,7 +22,7 @@
             </tr>
             @forelse ($expenses as $key=>$expense)
             <tr>
-                <td>{{ $key + 1 }}</td>
+                <td>{{ $expense->id }}</td>
                 <td>{{ $expense->type_string }}</td>
                 <td>
                     @if($expense->type == 'general_expense')
