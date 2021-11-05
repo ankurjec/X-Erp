@@ -1,5 +1,11 @@
 @extends('layouts.admin-master')
 
+@section('style')
+    @parent
+    <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.css">
+@endsection
+
 @section('breadcrumb')
 <div class="c-subheader px-3">
           <!-- Breadcrumb-->
@@ -48,7 +54,7 @@
 		        </div>
 		    </div>
 		    
-		    <div class="col-xs-3 col-sm-3 col-md-3 user_id_select_box" style="display:none">
+		    {{-- <div class="col-xs-3 col-sm-3 col-md-3 user_id_select_box" style="display:none">
 		        <div class="form-group">
 		            <strong>User:</strong>
 		            <select name="user_id" class="form-control user_id_select">
@@ -60,11 +66,11 @@
 		                @endforeach
 		            </select>
 		        </div>
-		    </div>
+		    </div> --}}
 		    <div class="col-xs-3 col-sm-3 col-md-3 vendor_id_select_box" style="display:none">
 		        <div class="form-group">
 		            <strong>Vendor:</strong>
-		            <select name="vendor_id" class="form-control vendor_id_select">
+		            <select name="vendor_id" class="form-control vendor_id_select select2">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($vendors as $vendor)
 		                <option value="{{$vendor->id}}" @if($expense->vendor_id == $vendor->id) selected="selected" @endif>{{$vendor->name}}</option>
@@ -75,7 +81,7 @@
 		    <div class="col-xs-3 col-sm-3 col-md-3 customer_id_select_box" style="display:none">
 		        <div class="form-group">
 		            <strong>Customer:</strong>
-		            <select name="customer_id" class="form-control customer_id_select">
+		            <select name="customer_id" class="form-control customer_id_select select2">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($customers as $customer)
 		                <option value="{{$customer->id}}" @if($expense->customer_id == $customer->id) selected="selected" @endif>{{$customer->name}}</option>
@@ -101,7 +107,7 @@
 		    <div class="col-xs-3 col-sm-3 col-md-3">
 		        <div class="form-group">
 		            <strong>Order:</strong>
-		            <select name="order_id" class="form-control">
+		            <select name="order_id" class="form-control select2">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($orders as $order)
     		                <option value="{{$order->id}}" @if($expense->order_id == $order->id) selected="selected" @endif>#{{$order->id}}-{{substr($order->name,0,20)}}</option>
@@ -136,8 +142,13 @@
 
 @section('script')
     @parent
+	<script src="/vendor/select2/js/select2.full.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$('.select2').select2({
+		theme: 'bootstrap4'
+	});
+
     entityVisibility();
     
     $(document).on('change','.entity_type_select',function(e){
@@ -146,8 +157,8 @@ $(document).ready(function(){
     
     function entityVisibility() {
         var $this = $('.entity_type_select');
-           var user_id_select = $this.closest('.expense_row').find('.user_id_select');
-           var user_id_select_box = $this.closest('.expense_row').find('.user_id_select_box');
+        //    var user_id_select = $this.closest('.expense_row').find('.user_id_select');
+        //    var user_id_select_box = $this.closest('.expense_row').find('.user_id_select_box');
            
            var vendor_id_select = $this.closest('.expense_row').find('.vendor_id_select');
            var vendor_id_select_box = $this.closest('.expense_row').find('.vendor_id_select_box');
@@ -156,7 +167,7 @@ $(document).ready(function(){
            var customer_id_select_box = $this.closest('.expense_row').find('.customer_id_select_box');
            
            if($this.val() == "general_expense") {
-               user_id_select_box.show();
+            //    user_id_select_box.show();
                
                vendor_id_select.val('')
                vendor_id_select_box.hide();
@@ -164,24 +175,24 @@ $(document).ready(function(){
                customer_id_select.val('');
                customer_id_select_box.hide();
            } else if($this.val() == "vendor_payment") {
-               user_id_select.val('');
-               user_id_select_box.hide();
+            //    user_id_select.val('');
+            //    user_id_select_box.hide();
                
                vendor_id_select_box.show();
                
                customer_id_select.val('');
                customer_id_select_box.hide();
            } else if($this.val() == "refunds") {
-               user_id_select.val('');
-               user_id_select_box.hide();
+            //    user_id_select.val('');
+            //    user_id_select_box.hide();
                
                vendor_id_select.val('')
                vendor_id_select_box.hide();
                
                customer_id_select_box.show();
            } else {
-               user_id_select.val('');
-               user_id_select_box.hide();
+            //    user_id_select.val('');
+            //    user_id_select_box.hide();
                
                vendor_id_select.val('')
                vendor_id_select_box.hide();

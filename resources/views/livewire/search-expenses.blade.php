@@ -7,7 +7,7 @@
 
     </div>
     <div class="table100 ver1">
-        <table class="table table-bordered table-striped table-condensed table-responsive-sm">
+        <table class="table table-bordered table-striped table-condensed table-responsive-sm" wire:loading.class="loading" wire:target="search">
             <tr>
                 <th>Id #</th>
                 <th>Type</th>

@@ -4,7 +4,7 @@
         <h1>Search Results:</h1>
     </div>
     <div class="table100 ver1">
-        <table class="table table-bordered table-striped table-condensed table-responsive-sm">
+        <table class="table table-bordered table-striped table-condensed table-responsive-sm" wire:loading.class="loading" wire:target="search">
             <tr>
                 <th>No</th>
                 <th>Name</th>

@@ -4,7 +4,7 @@
 	@parent
 <link rel="stylesheet" href="/vendor/bootstrap4-multiselect/css/BsMultiSelect.min.css">
 <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
-<link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.min.css">
+<link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.css">
 @endsection
 
 @section('breadcrumb')
