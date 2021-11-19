@@ -41,7 +41,7 @@
 	    @foreach ($loan_repayments as $loan_repayment)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ $loan_repayment->loan->id }} ({{ $loan_repayment->loan->user->name }})</td>
+	        <td>#{{ $loan_repayment->loan->id }} ({{ $loan_repayment->loan->vendor->name }})</td>
 	        <td>{{ $loan_repayment->amount }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('loan_repayments.destroy',$loan_repayment->id) }}" method="POST">

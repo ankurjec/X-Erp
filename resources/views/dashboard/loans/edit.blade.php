@@ -38,13 +38,11 @@
          <div class="row">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>From User:</strong>
-		            <select name="user_id" class="form-control">
+		            <strong>Vendor:</strong>
+		            <select name="vendor_id" class="form-control">
 		                <option value="" disabled selected="selected">Select</option>
-		                @foreach($users as $user)
-    		                @if($user->id > 1)
-    		                <option value="{{$user->id}}" @if($loan->user_id == $user->id) selected="selected" @endif>{{$user->name}}</option>
-    		                @endif
+		                @foreach($vendors as $vendor)
+    		                <option value="{{$vendor->id}}" @if($loan->vendor_id == $vendor->id) selected="selected" @endif>{{$vendor->name}}</option>
 		                @endforeach
 		            </select>
 		        </div>

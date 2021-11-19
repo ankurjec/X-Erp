@@ -34,13 +34,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Loan:</strong>
-                {{ $loan_repayment->loan->id }} ({{ $loan_repayment->loan->user->name }})
+                #{{$loan_repayment->loan->id}} ({{$loan_repayment->loan->vendor->name}})
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Amount:</strong>
-                {{ $loan_repayment->amount }}
+                {{ moneyFormatIndia$loan_repayment->amount) }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

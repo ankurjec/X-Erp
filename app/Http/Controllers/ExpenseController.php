@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Notifications\NewExpense;
 use App\Models\Order;
+use Illuminate\Support\Facades\Log;
 
 class ExpenseController extends Controller
 {
@@ -91,7 +92,7 @@ class ExpenseController extends Controller
     		    try {
                     $user->notify(new NewExpense($expense));
     		    } catch (\Exception $e) {
-                    \Log::error($e->getMessage());
+                    Log::error($e->getMessage());
                 }
 		    }
     

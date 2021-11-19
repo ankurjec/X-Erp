@@ -41,7 +41,7 @@
 		            <select name="loan_id" class="form-control">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($loans as $loan)
-    		                <option value="{{$loan->id}}">{{$loan->id}} ({{$loan->user->name}})</option>
+    		                <option value="{{$loan->id}}">#{{$loan->id}} ({{$loan->vendor->name}} - {{moneyFormatIndia($loan->amount)}})</option>
 		                @endforeach
 		            </select>
 		        </div>

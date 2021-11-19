@@ -11,11 +11,11 @@ class Loan extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
-        'user_id', 'amount', 'received_date', 'details', 'project_id'
+        'vendor_id', 'amount', 'received_date', 'details', 'project_id'
     ];
-    
-    public function user()
+
+    public function vendor()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Vendor::class);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Loan;
-use App\Models\User;
+use App\Models\Vendor;
 
 class LoanController extends Controller
 {
@@ -35,8 +35,8 @@ class LoanController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('dashboard.loans.create',compact('users'));
+        $vendors = Vendor::all();
+        return view('dashboard.loans.create',compact('vendors'));
     }
     
     /**
@@ -48,7 +48,7 @@ class LoanController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'user_id' => 'required',
+            'vendor_id' => 'required',
             'amount' => 'required',
         ]);
         
@@ -66,7 +66,8 @@ class LoanController extends Controller
      */
     public function show(Loan $loan)
     {
-        return view('dashboard.loans.show',compact('loan'));
+        $vendors = Vendor::all();
+        return view('dashboard.loans.show',compact('loan','vendors'));
     }
     
     /**
@@ -77,8 +78,8 @@ class LoanController extends Controller
      */
     public function edit(Loan $loan)
     {
-        $users = User::all();
-        return view('dashboard.loans.edit',compact('loan','users'));
+        $vendors = Vendor::all();
+        return view('dashboard.loans.edit',compact('loan','vendors'));
     }
     
     /**
@@ -91,7 +92,7 @@ class LoanController extends Controller
     public function update(Request $request, Loan $loan)
     {
          request()->validate([
-            'user_id' => 'required',
+            'vendor_id' => 'required',
             'amount' => 'required',
         ]);
     

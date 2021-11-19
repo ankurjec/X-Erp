@@ -33,14 +33,14 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>From User:</strong>
-                {{ $loan->user->name }}
+                <strong>From Vendor:</strong>
+                {{ $loan->vendor->name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Amount:</strong>
-                {{ $loan->amount }}
+                {{ moneyFormatIndia($loan->amount) }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
