@@ -1,5 +1,11 @@
 @extends('layouts.admin-master')
 
+@section('style')
+    @parent
+    <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.css">
+@endsection
+
 @section('breadcrumb')
 <div class="c-subheader px-3">
           <!-- Breadcrumb-->
@@ -51,7 +57,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Customer:</strong>
-		            <select name="customer_id" class="form-control customer_id_select">
+		            <select name="customer_id" class="form-control customer_id_select select2">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($customers as $customer)
 		                <option value="{{$customer->id}}">{{$customer->name}}</option>
@@ -68,7 +74,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Mode:</strong>
-		            <select name="mode" class="form-control">
+		            <select name="mode" class="form-control select2">
 		                <option value="" disabled selected="selected">Select</option>
 						@foreach(config('settings.mode_of_payments') as $mode_of_payment)
 		                <option value="{{ $mode_of_payment }}">{{ $mode_of_payment }}</option>
@@ -168,4 +174,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    @parent
+    <script src="/vendor/select2/js/select2.full.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$('.select2').select2({
+			theme: 'bootstrap4'
+			});
+		});
+	</script>
 @endsection
