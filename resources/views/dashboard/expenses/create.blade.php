@@ -153,6 +153,8 @@
     <script src="/vendor/select2/js/select2.full.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            const fields_box = $('.input_fields_wrap').html();
+
 			$('.select2').select2({
 			theme: 'bootstrap4'
 			});
@@ -209,7 +211,7 @@
             var max_fields = 10; /*maximum input boxes allowed*/
             var wrapper = $(".input_fields_wrap"); /*Fields wrapper*/
             var add_button = $("#add_prod"); /*Add button ID*/
-            const fields_box = $('.input_fields_wrap').html();
+            // const fields_box = $('.input_fields_wrap').html();
 
             var x = 1; /*initlal text box count*/
             $(add_button).click(function(e) {
@@ -219,6 +221,9 @@
                     /*max input box allowed*/
                     x++; /*text box increment*/
                     $(wrapper).append(fields_box); /*add input box*/
+                    $('.select2').select2({
+                        theme: 'bootstrap4'
+                    });
                 } else {
                     alert('Maximum ' + max_fields + ' expense rows allowed.');
                 }

@@ -35,7 +35,10 @@ class SearchExpenses extends Component
 
         $query->with(['user', 'vendor', 'order']);
         return view('livewire.search-expenses', [
-            'expenses' => $query->latest()->paginate(10)
+            'expenses' => $query
+                    ->orderBy('paid_flag', 'ASC')
+                    ->orderBy('created_at', 'ASC')
+                    ->paginate(10)
         ]);
     }
 }
