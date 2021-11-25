@@ -71,8 +71,9 @@
 		            <strong>Mode:</strong>
 		            <select name="mode" class="form-control">
 		                <option value="" disabled selected="selected">Select</option>
-		                <option value="bank_transfer" @if($payment_received->mode == "bank_transfer") selected="selected" @endif>Bank Transfer</option>
-		                <option value="cash" @if($payment_received->mode == "cash") selected="selected" @endif>Cash</option>
+						@foreach(config('settings.mode_of_payments') as $mode_of_payment)
+		                <option value="{{ $mode_of_payment }}" @if($payment_received->mode == $mode_of_payment) selected="selected" @endif>{{ $mode_of_payment }}</option>
+						@endforeach
 		            </select>
 		        </div>
 		    </div>

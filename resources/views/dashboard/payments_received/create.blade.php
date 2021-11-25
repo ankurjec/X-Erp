@@ -70,8 +70,9 @@
 		            <strong>Mode:</strong>
 		            <select name="mode" class="form-control">
 		                <option value="" disabled selected="selected">Select</option>
-		                <option value="bank_transfer">Bank Transfer</option>
-		                <option value="cash">Cash</option>
+						@foreach(config('settings.mode_of_payments') as $mode_of_payment)
+		                <option value="{{ $mode_of_payment }}">{{ $mode_of_payment }}</option>
+						@endforeach
 		            </select>
 		        </div>
 		    </div>
