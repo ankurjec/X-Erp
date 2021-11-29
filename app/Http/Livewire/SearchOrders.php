@@ -16,9 +16,9 @@ class SearchOrders extends Component
     public function updatingSearch()
     {
       $this->resetPage();
-   }
-    public function render()
-   
+    }
+    
+    public function render()   
     {
         $query = Order::query();
         if($this->search){

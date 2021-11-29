@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
-    public function company()
+    public function customer()
     {
-        return $this->hasOne(CompanyDetail::class,'invoice_id')->withDefault();
+        return $this->belongsTo(Customer::class)->withDefault();
     }
 
      public function items()
     {
-        return $this->hasMany(Item::class,'invoice_id');
+        return $this->hasMany(Item::class);
     }
 }
