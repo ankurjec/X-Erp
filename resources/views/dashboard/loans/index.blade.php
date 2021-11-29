@@ -36,6 +36,7 @@
             <th>No</th>
             <th>From</th>
             <th>Amount</th>
+            <th>Total Repayment</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($loans as $loan)
@@ -43,6 +44,7 @@
 	        <td>{{ ++$i }}</td>
 	        <td>{{ $loan->vendor->name }}</td>
 	        <td>{{ $loan->amount }}</td>
+            <td>{{ $loan->total_repayment }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('loans.destroy',$loan->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('loans.show',$loan->id) }}">Show</a>

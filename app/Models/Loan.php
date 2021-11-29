@@ -18,4 +18,14 @@ class Loan extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+
+    public function loan_repayments()
+    {
+        return $this->hasMany(LoanRepayment::class);
+    }
+
+    public function getTotalRepaymentAttribute()
+    {
+        return $this->loan_repayments()->sum('amount');
+    }
 }
