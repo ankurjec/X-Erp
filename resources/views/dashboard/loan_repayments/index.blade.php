@@ -42,7 +42,7 @@
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>#{{ $loan_repayment->loan->id }} ({{ $loan_repayment->loan->vendor->name }})</td>
-	        <td>{{ $loan_repayment->amount }}</td>
+	        <td>{{ moneyFormatIndia($loan_repayment->amount) }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('loan_repayments.destroy',$loan_repayment->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('loan_repayments.show',$loan_repayment->id) }}">Show</a>

@@ -43,8 +43,8 @@
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ $loan->vendor->name }}</td>
-	        <td>{{ $loan->amount }}</td>
-            <td>{{ $loan->total_repayment }}</td>
+	        <td>{{ moneyFormatIndia($loan->amount) }}</td>
+            <td>{{ moneyFormatIndia($loan->total_repayment) }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('loans.destroy',$loan->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('loans.show',$loan->id) }}">Show</a>
