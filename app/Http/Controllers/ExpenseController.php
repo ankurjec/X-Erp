@@ -27,9 +27,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::with(['vendor','user'])->with('order')->latest()->paginate(10);
-        return view('dashboard.expenses.index',compact('expenses'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        // $expenses = Expense::with(['vendor','user'])->with('order')->latest()->paginate(10);
+        return view('dashboard.expenses.index');
     }
 
     /**
