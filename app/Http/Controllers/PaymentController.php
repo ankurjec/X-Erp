@@ -27,9 +27,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::latest()->paginate(5);
-        return view('dashboard.payments.index',compact('payments'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        // $payments = Payment::latest()->paginate(5);
+        return view('dashboard.payments.index');
     }
     
     /**

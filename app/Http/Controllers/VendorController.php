@@ -18,9 +18,8 @@ class VendorController extends Controller
     
     public function index()
     {
-        $vendors = Vendor::latest()->paginate(10);
-        return view('dashboard.vendors.index',compact('vendors'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        // $vendors = Vendor::latest()->paginate(10);
+        return view('dashboard.vendors.index');
     }
     
     
