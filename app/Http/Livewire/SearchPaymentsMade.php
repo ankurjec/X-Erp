@@ -27,7 +27,7 @@ class SearchPaymentsMade extends Component
         $query->where('expense_ids', 'like', '%' . $this->search . '%');
     }
     return view('livewire.search-payments-made', [
-        'payments' => $query->latest()->paginate(10),
+        'payments' => $query->orderBy('payment_date', 'DESC')->paginate(10),
     ]);
 }
 }
