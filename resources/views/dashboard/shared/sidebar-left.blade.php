@@ -1,11 +1,11 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
   <div class="c-sidebar-brand d-lg-down-none">
-        <!--<svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
+        {{--<svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
           <use xlink:href="/vendor/coreui/assets/brand/coreui.svg#full"></use>
         </svg>
         <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
           <use xlink:href="/vendor/coreui/assets/brand/coreui.svg#signet"></use>
-        </svg>-->
+        </svg>--}}
         <h3>{{config('settings.app_name')}}</h3>
   </div>
   <ul class="c-sidebar-nav">
@@ -208,9 +208,9 @@
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.index') }}"><svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
             </svg> Manage Loan Repayments</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.create') }}"><svg class="c-sidebar-nav-icon">
+        {{--<li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.create') }}"><svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
-            </svg> Add Loan Repayments</a></li>
+            </svg> Add Loan Repayments</a></li>--}}
       </ul>
     </li>
     @endcan

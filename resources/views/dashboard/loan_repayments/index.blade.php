@@ -22,11 +22,11 @@
             <div class="float-left">
                 <h2>Loan Repayments</h2>
             </div>
-            <div class="float-right">
+            {{-- <div class="float-right">
                 @can('loan-repayment-create')
                 <a class="btn btn-success" href="{{ route('loan_repayments.create') }}"> New Loan Repayment</a>
                 @endcan
-            </div>
+            </div> --}}
         </div>
     </div>
 
