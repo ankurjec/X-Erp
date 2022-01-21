@@ -39,7 +39,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Loan:</strong>
-		            <select name="user_id" class="form-control">
+		            <select name="loan_id" class="form-control">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($loans as $loan)
     		                <option value="{{$loan_repayment->id}}" @if($loan_repayment->loan_id == $loan->id) selected="selected" @endif>#{{$loan->id}} ({{$loan->vendor->name}} - {{moneyFormatIndia($loan->amount)}})</option>
