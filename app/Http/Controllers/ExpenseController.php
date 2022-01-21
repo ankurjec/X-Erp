@@ -171,7 +171,7 @@ class ExpenseController extends Controller
     
         $expense->update(request()->except(['_method','_token','action']));        
     
-        return redirect()->route('expenses.index')
+        return redirect()->back()
                         ->with('success','Expense updated successfully');
     }
 
