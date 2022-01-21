@@ -93,7 +93,7 @@ class ExpenseController extends Controller
 
                 //Loan Repayment Add
                 if(isset($request->input('loan_id')[$key]) && $request->input('loan_id')[$key]) {
-                    $this->AddToLoanRepayment($expense->loan_id,$expense->amount,$expense->id);
+                    $this->AddToLoanRepayment($expense->loan_id,$expense->amount,$expense->id,$expense->created_at);
                 }
     		    
     		    $user = User::find(1);
@@ -166,7 +166,7 @@ class ExpenseController extends Controller
 
         //Loan Repayment Add
         if(!$expense->loan_id && $request->input('loan_id')) {
-            $this->AddToLoanRepayment($request->input('loan_id'),$request->input('amount'),$expense->id);
+            $this->AddToLoanRepayment($request->input('loan_id'),$request->input('amount'),$expense->id,$expense->created_at);
         }
     
         $expense->update(request()->except(['_method','_token','action']));        
@@ -189,11 +189,11 @@ class ExpenseController extends Controller
                         ->with('success','Expense deleted successfully');
     }
 
-    public function AddToLoanRepayment($loan_id,$amount,$expense_id) {
+    public function AddToLoanRepayment($loan_id,$amount,$expense_id,$repayment_date) {
         LoanRepayment::create([
             'loan_id' => $loan_id, 
             'amount' => $amount,
-            'repayment_date' => now(),
+            'repayment_date' => $repayment_date,
             'details' => 'Automatically created by expense #'.$expense_id,
             'project_id' => get_project_id()
         ]);
