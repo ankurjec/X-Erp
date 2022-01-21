@@ -165,7 +165,7 @@ class ExpenseController extends Controller
         ]);
 
         //Loan Repayment Add
-        if($expense->loan_id && $request->input('loan_id')) {
+        if(!$expense->loan_id && $request->input('loan_id')) {
             $this->AddToLoanRepayment($request->input('loan_id'),$request->input('amount'),$expense->id);
         }
     
