@@ -33,7 +33,7 @@
     <div class="table100 ver1">
     <table class="table table-bordered table-striped table-condensed table-responsive-sm">
         <tr>
-            <th>No</th>
+            <th>Loan No</th>
             <th>From</th>
             <th>Amount</th>
             <th>Total Repayment</th>
@@ -41,7 +41,7 @@
         </tr>
 	    @foreach ($loans as $loan)
 	    <tr>
-	        <td>{{ ++$i }}</td>
+	        <td>{{ $loan->id }}</td>
 	        <td>{{ $loan->vendor->name }}</td>
 	        <td>{{ moneyFormatIndia($loan->amount) }}</td>
             <td>{{ moneyFormatIndia($loan->total_repayment) }}</td>
