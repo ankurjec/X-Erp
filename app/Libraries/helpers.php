@@ -116,3 +116,7 @@ function moneyFormatIndia_int($num){
     }
     return $thecash; // writes the final format where $currency is the currency symbol.
 }
+
+function date_custom($date) {
+    return $date>0 ? date('d/m/Y', strtotime($date)) : '';
+}

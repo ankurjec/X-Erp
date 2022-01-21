@@ -15,6 +15,7 @@
                 <th>Amount (Rs.)</th>
                 <th>Paid/Unpaid</th>
                 <th>Order</th>
+                <th>Loan</th>
                 <th>Date</th>
                 <th>Details</th>
                 <!--<th>Total Paid (Rs.) <i class="fas fa-info-circle" title="This may include multiple expenses"></i></th>-->
@@ -36,10 +37,11 @@
                 <td>{{ moneyFormatIndia($expense->amount) }}</td>
                 <td>{!! $expense->paid_flag ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-secondary">Unpaid</span>'!!}</td>
                 <td>
-                    @if($expense->order)
+                    @if($expense->order_id)
                     #{{ $expense->order->id }}-{{ substr($expense->order->name,0,20) }}
                     @endif
                </td>
+               <td>{{ $expense->loan_id ? '#'.$expense->loan_id.'('.$expense->loan->vendor->name.')' : '' }}</td>
                <td>
                    {{ $expense->created_at->format('d M Y') }}
                </td>

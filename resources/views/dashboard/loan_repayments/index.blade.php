@@ -36,6 +36,7 @@
             <th>No</th>
             <th>From</th>
             <th>Amount</th>
+            <th>Repayment/Generated Date</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($loan_repayments as $loan_repayment)
@@ -43,6 +44,7 @@
 	        <td>{{ ++$i }}</td>
 	        <td>#{{ $loan_repayment->loan->id }} ({{ $loan_repayment->loan->vendor->name }})</td>
 	        <td>{{ moneyFormatIndia($loan_repayment->amount) }}</td>
+            <td>{{ date_custom($loan_repayment->repayment_date) }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('loan_repayments.destroy',$loan_repayment->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('loan_repayments.show',$loan_repayment->id) }}">Show</a>

@@ -22,7 +22,7 @@ class SearchExpenses extends Component
     public function render()
 
     {
-        $query = Expense::query();
+        $query = Expense::with(['loan','order']);
         if ($this->search) {
             $query->whereHas('user', function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%');

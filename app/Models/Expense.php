@@ -12,7 +12,7 @@ class Expense extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
-        'type', 'entity_type', 'user_id', 'vendor_id', 'customer_id', 'employee_id', 'amount', 'details', 'project_id', 'createdby_user_id', 'paid_flag', 'order_id'
+        'type', 'entity_type', 'user_id', 'vendor_id', 'customer_id', 'employee_id', 'amount', 'details', 'project_id', 'createdby_user_id', 'paid_flag', 'order_id', 'loan_id'
     ];
     
     public function user()
@@ -33,6 +33,11 @@ class Expense extends Model
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function loan()
+    {
+        return $this->belongsTo(Loan::class);
     }
     
     public function getTypeStringAttribute()
