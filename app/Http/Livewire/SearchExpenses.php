@@ -11,7 +11,9 @@ class SearchExpenses extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $search;
+    public $search, $order_id;
+
+    protected $queryString = ['order_id'];
 
     public function updatingSearch()
     {
@@ -31,6 +33,10 @@ class SearchExpenses extends Component
             $query->orWhereHas('customer', function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%');
             });
+        }
+
+        if ($this->order_id) {
+            $query->where('order_id', $this->order_id);
         }
 
         $query->with(['user', 'vendor', 'order']);
