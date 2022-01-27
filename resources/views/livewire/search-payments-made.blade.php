@@ -7,8 +7,11 @@
         <table class="table table-bordered table-striped table-condensed table-responsive-sm" wire:loading.class="loading" wire:target="search">
             <tr>
                 <th>No</th>
-                <th>Expense Ids</th>
+                <th>Expense Ids</th>                
                 <th>Amount (Rs.)</th>
+                <th>Account Name</th>
+                <th>Vendor/Customer</th>
+                <th>Final Beneficiary</th>
                 <th>Payment Date</th>
                 <th width="280px">Action</th>
             </tr>
@@ -17,6 +20,15 @@
                 <td>{{ $key+1 }}</td>
                 <td>{{ json_encode($payment->expense_ids,true) }}</td>
                 <td>{{ moneyFormatIndia($payment->amount) }}</td>
+                <td>{{ $payment->paid_to_name }}</td>
+                <td>
+                    @if($payment->paid_entity == 'vendor')
+                    {{ $payment->vendor->name }}
+                    @elseif($payment->paid_entity == 'customer')
+                    {{ $payment->customer->name }}   
+                    @endif                 
+                </td>
+                <td>{{ $payment->final_beneficiary->name ?? '' }}</td>
                 <td>{{ $payment->payment_date->format('d M Y') }}</td>
                 <td>
                     <form class="delForm" action="{{ route('payments.destroy',$payment->id) }}" method="POST">

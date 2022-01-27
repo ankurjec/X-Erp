@@ -140,7 +140,7 @@ class PaymentController extends Controller
             }
         }
     
-        return redirect()->route('payments.index')
+        return redirect()->back()
                         ->with('success','Payment updated successfully');
     }
     
