@@ -48,6 +48,7 @@ class SearchPaymentsReceived extends Component
         $query->orWhereHas('customer', function ($q) {
             $q->where('name', 'like', '%' . $this->search . '%');
         });
+        $query->orWhere('amount',$this->search);
     }
 
     if ($this->order_id) {

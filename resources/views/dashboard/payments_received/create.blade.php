@@ -87,6 +87,10 @@
 		            <strong>Invoice No:</strong>
 		            <input type="text" name="invoice_no" class="form-control" placeholder="Invoice No">
 		        </div>
+				<div class="form-group">
+		            <strong>No Invoice Reason (Enter if there is no Invoice):</strong>
+		            <input type="text" name="no_invoice_reason" class="form-control" placeholder="No Invoice Reason">
+		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">

@@ -40,7 +40,8 @@ class PaymentsReceivedController extends Controller
     {
         request()->validate([
             'customer_id' => 'required',
-            'amount' => 'required'
+            'amount' => 'required',
+            'no_invoice_reason' => 'required_without:invoice_no'
         ]);
     
         PaymentsReceived::create($request->all());
@@ -79,13 +80,14 @@ class PaymentsReceivedController extends Controller
     {
         request()->validate([
             'customer_id' => 'required',
-            'amount' => 'required'
+            'amount' => 'required',
+            'no_invoice_reason' => 'required_without:invoice_no'
         ]);
     
         $payment_received = PaymentsReceived::find($id);
         $payment_received->update($request->all());
     
-        return redirect()->route('payments_received.index')
+        return redirect()->back()
                         ->with('success','Payments received updated successfully');
     }
     

@@ -65,6 +65,10 @@
                 <strong>Invoice No:</strong>
                 {{ $payment_received->invoice_no }}
             </div>
+            <div class="form-group">
+                <strong>No Invoice Reason (Enter if there is no Invoice):</strong>
+                {{$payment_received->no_invoice_reason}}
+            </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">

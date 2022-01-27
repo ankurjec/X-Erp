@@ -3,8 +3,6 @@
         <input class="form-control" wire:model="search" type="search"
             placeholder="Search invoices by Customer Name...">
 
-        <h1>Invoice Results:</h1>
-
     </div>
     <div class="table100 ver1">
         <table class="table table-bordered table-condensed table-responsive-sm" wire:loading.class='loading'
