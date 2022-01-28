@@ -1,11 +1,11 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
   <div class="c-sidebar-brand d-lg-down-none">
-        <!--<svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
+        {{--<svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
           <use xlink:href="/vendor/coreui/assets/brand/coreui.svg#full"></use>
         </svg>
         <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
           <use xlink:href="/vendor/coreui/assets/brand/coreui.svg#signet"></use>
-        </svg>-->
+        </svg>--}}
         <h3>{{config('settings.app_name')}}</h3>
   </div>
   <ul class="c-sidebar-nav">
@@ -142,7 +142,58 @@
       </ul>
     </li>
     @endcan
-    
+    @can('debit-list')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
+        <svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-money"></use>
+            </svg> Debit Note
+      </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('debit_note.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Debit Note</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('debit_note.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Debit Note</a></li>
+      </ul>
+    </li>
+    @endcan
+    @can('credit-list')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
+        <svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-money"></use>
+            </svg> Credit Note
+      </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('credit_note.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Credit Note</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('credit_note.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Credit Note</a></li>
+      </ul>
+    </li>
+    @endcan
+
+    @can('employees-list')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-dropdown-toggle" href="#">
+        <svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-money"></use>
+            </svg> Employee 
+      </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('employees.index') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Manage Employee</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('employees.create') }}"><svg class="c-sidebar-nav-icon">
+              <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
+            </svg> Add Employee</a></li>
+      </ul>
+    </li>
+    @endcan
     @can('payments-received-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
       <a class="c-sidebar-nav-dropdown-toggle" href="#">
@@ -208,12 +259,14 @@
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.index') }}"><svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
             </svg> Manage Loan Repayments</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.create') }}"><svg class="c-sidebar-nav-icon">
+        {{--<li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('loan_repayments.create') }}"><svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
-            </svg> Add Loan Repayments</a></li>
+            </svg> Add Loan Repayments</a></li>--}}
       </ul>
     </li>
     @endcan
+
+    @can('invoice-list')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
       <a class="c-sidebar-nav-dropdown-toggle" href="#">
         <svg class="c-sidebar-nav-icon">
@@ -221,14 +274,15 @@
             </svg> Invoice
       </a>
       <ul class="c-sidebar-nav-dropdown-items">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('invoice.create') }}"><svg class="c-sidebar-nav-icon">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('invoices.create') }}"><svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
             </svg> Create Invoice</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('view-records') }}"><svg class="c-sidebar-nav-icon">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('invoices.index') }}"><svg class="c-sidebar-nav-icon">
               <use xlink:href="/vendor/coreui/vendors/@coreui/icons/svg/free.svg#cil-chevron-circle-right-alt"></use>
             </svg> View All Invoices</a></li>
       </ul>
     </li>
+    @endcan
   </ul>
   
   <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>

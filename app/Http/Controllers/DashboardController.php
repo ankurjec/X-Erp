@@ -31,11 +31,12 @@ class DashboardController extends Controller
         
         $total_expense = $this->getTotalExpenses();
         $total_payments_received = $this->getTotalPaymentsReceived();
+        $total_loans = $this->getTotalLoans();
         $total_vendors = $this->getTotalVendors();
         $total_customers = $this->getTotalCustomers();
         
         $total_payments = $this->getTotalPayments();
-        $profit_loss = $total_payments_received - $total_payments;
+        $profit_loss = $total_payments_received + $total_loans - $total_payments;
         
         $expense_array = $this->getExpensesArray($start_date,$end_date);
         $payments_received_array = $this->getPaymentsReceivedArray($start_date,$end_date);
@@ -99,6 +100,11 @@ class DashboardController extends Controller
     
     public function getTotalPayments() {
         $total = Payment::sum('amount');
+        return $total;
+    }
+
+    public function getTotalLoans() {
+        $total = Loan::sum('amount');
         return $total;
     }
 }

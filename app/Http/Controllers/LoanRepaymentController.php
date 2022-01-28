@@ -23,7 +23,7 @@ class LoanRepaymentController extends Controller
      */
     public function index()
     {
-        $loan_repayments = LoanRepayment::latest()->paginate(5);
+        $loan_repayments = LoanRepayment::with('loan')->latest()->paginate(5);
         return view('dashboard.loan_repayments.index',compact('loan_repayments'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }

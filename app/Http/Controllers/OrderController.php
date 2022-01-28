@@ -17,9 +17,8 @@ class OrderController extends Controller
     
     public function index()
     {
-        $orders = Order::latest()->paginate(10);
-        return view('dashboard.orders.index',compact('orders'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        // $orders = Order::latest()->paginate(10);
+        return view('dashboard.orders.index');
     }
     
     

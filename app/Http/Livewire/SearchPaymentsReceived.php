@@ -12,7 +12,9 @@ class SearchPaymentsReceived extends Component
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
-  public $search;
+  public $search, $order_id;
+
+  protected $queryString = ['order_id'];
 
     public function updatingSearch()
     {
@@ -23,35 +25,40 @@ class SearchPaymentsReceived extends Component
     //{
         //return view('livewire.search-payments-received');
    // }
-//}
+    //}
 
 
-{
-    $query = PaymentsReceived::query();
-//     if($this->search){
-//         $query->where('from', 'like', '%' . $this->search . '%');
-//     }
-//     return view('livewire.search-payments-received', [
-//         'payments_received' => $query->paginate(10),
-//     ]);
-// }
-// }
-if ($this->search) {
-    $query->whereHas('customer', function ($q) {
-        $q->where('name', 'like', '%' . $this->search . '%');
-    });
-    $query->orWhereHas('order', function ($q) {
-        $q->where('name', 'like', '%' . $this->search . '%');
-    });
-    $query->orWhereHas('customer', function ($q) {
-        $q->where('name', 'like', '%' . $this->search . '%');
-    });
-}
+    {
+        $query = PaymentsReceived::query();
+    //     if($this->search){
+    //         $query->where('from', 'like', '%' . $this->search . '%');
+    //     }
+    //     return view('livewire.search-payments-received', [
+    //         'payments_received' => $query->paginate(10),
+    //     ]);
+    // }
+    // }
+    if ($this->search) {
+        $query->whereHas('customer', function ($q) {
+            $q->where('name', 'like', '%' . $this->search . '%');
+        });
+        $query->orWhereHas('order', function ($q) {
+            $q->where('name', 'like', '%' . $this->search . '%');
+        });
+        $query->orWhereHas('customer', function ($q) {
+            $q->where('name', 'like', '%' . $this->search . '%');
+        });
+        $query->orWhere('amount',$this->search);
+    }
 
-$query->with('customer', 'order');
-return view('livewire.search-payments-received', [
-    'payments_received' => $query->paginate(10),
-]);
-}
+    if ($this->order_id) {
+        $query->where('order_id', $this->order_id);
+    }
+
+    $query->with('customer', 'order');
+    return view('livewire.search-payments-received', [
+        'payments_received' => $query->latest('received_date')->paginate(10),
+    ]);
+    }
 }
 

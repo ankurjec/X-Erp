@@ -17,7 +17,8 @@
 </head>
 
 <body>
-    @yield('content')    
+    @yield('content')
+
     @livewireScripts
 
 

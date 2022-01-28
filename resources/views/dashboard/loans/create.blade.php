@@ -1,5 +1,11 @@
 @extends('layouts.admin-master')
 
+@section('style')
+    @parent
+    <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.css">
+@endsection
+
 @section('breadcrumb')
 <div class="c-subheader px-3">
           <!-- Breadcrumb-->
@@ -36,12 +42,12 @@
          <div class="row">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>From User:</strong>
-		            <select name="user_id" class="form-control">
+		            <strong>Vendor:</strong>
+		            <select name="vendor_id" class="form-control select2">
 		                <option value="" disabled selected="selected">Select</option>
-		                @foreach($users as $user)
-    		                @if($user->id > 1)
-    		                <option value="{{$user->id}}">{{$user->name}}</option>
+		                @foreach($vendors as $vendor)
+    		                @if($vendor->id > 1)
+    		                <option value="{{$vendor->id}}">{{$vendor->name}}</option>
     		                @endif
 		                @endforeach
 		            </select>
@@ -95,4 +101,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    @parent
+    <script src="/vendor/select2/js/select2.full.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$('.select2').select2({
+			theme: 'bootstrap4'
+			});
+		});
+	</script>
 @endsection

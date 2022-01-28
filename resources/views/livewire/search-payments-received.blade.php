@@ -1,32 +1,31 @@
 <div>
 
     <div>
-        <input class="form-control" wire:model="search" type="search" placeholder="Search posts by Receiver...">
-        <h1>Search Results:</h1>
+        <input class="form-control" wire:model="search" type="search" placeholder="Search Payments Received">
     </div>
     <div class="table100 ver1">
-        <table class="table table-bordered table-striped table-condensed table-responsive-sm">
-            <tr>
-                <th>No</th>
+        <table class="table table-bordered table-striped table-condensed table-responsive-sm" wire:loading.class="loading" wire:target="search">
+            <tr>                
                 <th>Date</th>
                 <th>Name</th>
-                <th>Amount (Rs.)</th>
                 <th>Order</th>
+                <th>Amount (Rs.)</th>
+                <th>Payment Mode</th>                
                 <th>Invoice No</th>
                 <th>Full / Partial / Advance</th>
                 <th width="280px">Action</th>
             </tr>
             @forelse ($payments_received as $key=>$payment_received)
             <tr>
-                <td>{{ $key }}</td>
-                <td>{{ $payment_received->received_date ? $payment_received->received_date->format('d M Y') : '' }}</td>
+                <td>{{ $payment_received->received_date ? $payment_received->received_date->format('d M Y') : '' }}</td>                
                 <td>{{ $payment_received->customer ? $payment_received->customer->name : 'Not Available' }}</td>
-                <td>{{ moneyFormatIndia($payment_received->amount) }}</td>
                 <td>
                     @if($payment_received->order)
                     #{{ $payment_received->order->id }}-{{ substr($payment_received->order->name,0,20) }}
                     @endif
                </td>
+                <td>{{ moneyFormatIndia($payment_received->amount) }}</td>
+                <td>{{ $payment_received->mode }}</td>                
                <td>{{ $payment_received->invoice_no }}</td>
                <td>
                     @if($payment_received->full_partial_advance == 'advance')

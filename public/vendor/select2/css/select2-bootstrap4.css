@@ -67,7 +67,9 @@ form.was-validated select:valid ~ .select2-container--bootstrap4 .select2-select
   border-color: #28a745; }
 
 .select2-container--bootstrap4 .select2-search {
-  width: 100%; }
+  width: 100%; 
+  background-color: #ebedef; /*Rahul*/
+}
 
 .select2-container--bootstrap4 .select2-dropdown {
   border-color: #ced4da;
@@ -95,7 +97,9 @@ form.was-validated select:valid ~ .select2-container--bootstrap4 .select2-select
     padding-left: 1em; }
 
 .select2-container--bootstrap4 .select2-results__option {
-  padding: 0.375rem 0.75rem; }
+  padding: 0.375rem 0.75rem; 
+  background-color: #ebedef; /*Rahul*/
+}
 
 .select2-container--bootstrap4 .select2-results > .select2-results__options {
   max-height: 15em;

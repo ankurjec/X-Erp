@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Expense;
 use App\Models\Vendor;
 use App\Models\Customer;
+use App\Models\Loan;
+use App\Models\LoanRepayment;
 use App\Models\User;
 use App\Notifications\NewExpense;
 use App\Models\Order;
+use Illuminate\Support\Facades\Log;
 
 class ExpenseController extends Controller
 {
@@ -38,6 +41,8 @@ class ExpenseController extends Controller
      */
     public function create()
     {
+        $loans = Loan::all();
+
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
@@ -47,7 +52,7 @@ class ExpenseController extends Controller
         })
             ->get();
 
-        return view('dashboard.expenses.create', compact('customers', 'vendors', 'users', 'orders'));
+        return view('dashboard.expenses.create', compact('customers', 'vendors', 'users', 'orders','loans'));
     }
 
     /**
@@ -152,6 +157,8 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
+        $loans = Loan::all();
+
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
@@ -160,7 +167,7 @@ class ExpenseController extends Controller
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
-        return view('dashboard.expenses.show', compact('expense', 'customers', 'vendors', 'users', 'orders'));
+        return view('dashboard.expenses.show', compact('expense', 'customers', 'vendors', 'users', 'orders','loans'));
     }
 
     /**
@@ -171,6 +178,8 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
+        $loans = Loan::all();
+
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
@@ -179,7 +188,7 @@ class ExpenseController extends Controller
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
-        return view('dashboard.expenses.edit', compact('expense', 'customers', 'vendors', 'users', 'orders'));
+        return view('dashboard.expenses.edit', compact('loans','expense', 'customers', 'vendors', 'users', 'orders'));
     }
 
     /**
@@ -214,5 +223,15 @@ class ExpenseController extends Controller
 
         return redirect()->route('expenses.index')
             ->with('success', 'Expense deleted successfully');
+    }
+
+    public function AddToLoanRepayment($loan_id,$amount,$expense_id,$repayment_date) {
+        LoanRepayment::create([
+            'loan_id' => $loan_id, 
+            'amount' => $amount,
+            'repayment_date' => $repayment_date,
+            'details' => 'Automatically created by expense #'.$expense_id,
+            'project_id' => get_project_id()
+        ]);
     }
 }

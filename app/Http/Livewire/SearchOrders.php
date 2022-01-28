@@ -16,16 +16,16 @@ class SearchOrders extends Component
     public function updatingSearch()
     {
       $this->resetPage();
-   }
-    public function render()
-   
+    }
+    
+    public function render()   
     {
         $query = Order::query();
         if($this->search){
             $query->where('name', 'like', '%' . $this->search . '%');
         }
         return view('livewire.search-orders', [
-            'orders' => $query->paginate(10),
+            'orders' => $query->latest()->paginate(10),
         ]);
     }
 }
