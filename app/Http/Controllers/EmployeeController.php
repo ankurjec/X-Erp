@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Expense;
+use App\Models\Employee;
 use App\Models\Vendor;
 use App\Models\Customer;
 use App\Models\Loan;
@@ -13,14 +13,14 @@ use App\Notifications\NewExpense;
 use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 
-class ExpenseController extends Controller
+class EmployeeController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:expense-list|expense-create|expense-edit|expense-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:expense-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:expense-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:expense-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:employees-list|employees-create|employees-edit|employees-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:employees-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:employees-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:employees-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -29,8 +29,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::with(['vendor', 'user'])->with('order')->latest()->paginate(10);
-        return view('dashboard.expenses.index', compact('expenses'))
+        $employees = Employee::latest()->paginate(10);
+        return view('dashboard.employees.index', compact('employees'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -52,7 +52,7 @@ class ExpenseController extends Controller
         })
             ->get();
 
-        return view('dashboard.expenses.create', compact('customers', 'vendors', 'users', 'orders','loans'));
+        return view('dashboard.employees.create', compact('customers', 'vendors', 'users', 'orders','loans'));
     }
 
     /**
@@ -64,69 +64,15 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'type' => 'required',
-            'amount' => 'required',
-            'photos.*' => 'required|mimes:pdf,xlx,csv,doc,docx,jpg,jpeg,png,txt|max:5034',
+            'employee_name' => 'required',
+            'details' => 'required',
+            'address' => 'required',
 
         ]);
 
-        $types = $request->input('type');
-        //  dd($request->photos);
-        foreach ($types as $key => $type) {
-            $expense = new Expense;
-            $expense->createdby_user_id = $request->user()->id;
-            $expense->type = $request->input('type')[$key];
-
-            if ($request->input('type')[$key] == "general_expense" && $request->hasFile('photos')) {
-                $expense->user_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
-            } else if ($request->input('type')[$key] == "vendor_payment" && $request->hasFile('photos')) {
-                $expense->vendor_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
-            } else if ($request->input('type')[$key] == "refunds" && $request->hasFile('photos')) {
-                $expense->customer_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
-            }
-
-            /*$expense->user_id = isset($request->input('user_id')[$key]) ? $request->input('user_id')[$key] : null;
-    		    $expense->vendor_id = isset($request->input('vendor_id')[$key]) ? $request->input('vendor_id')[$key] : null;
-    		    $expense->customer_id = isset($request->input('customer_id')[$key]) ? $request->input('customer_id')[$key] : null;*/
-            $expense->order_id = isset($request->input('order_id')[$key]) ? $request->input('order_id')[$key] : null;
-            $expense->amount = $request->input('amount')[$key];
-            //$expense->details = $request->input('details')[$key];
-
-
-            // if($request->hasFile('photos')){
-            //     //         // dd($request->photos);
-
-            //         }
-            $photos_multiple = $request->photos;
-            if ($photos_multiple) {
-                $paths = '';
-                foreach ($photos_multiple as $photo) {
-                    $path = $photo->store('uploads/expenses');
-                    if (!$paths) {
-                        $paths = $path;
-                    } else {
-                        $paths = $paths . ',' . $path;
-                    }
-                }
-                $expense->filename = $path;
-            }
-
-
-
-
-            $expense->project_id = get_project_id();
-            $expense->save();
-
-            $user = User::find(1);
-            try {
-                $user->notify(new NewExpense($expense));
-            } catch (\Exception $e) {
-                \Log::error($e->getMessage());
-            }
-        }
-
-        return redirect()->route('expenses.index')
-            ->with('success', 'Expenses created successfully.');
+        Employee::create(['employee_name' => request()->employee_name, 'dob' => request()->dob,'details' => request()->details,'dob' => request()->dob,'address' => request()->address,'phone' => request()->phone,'email' => request()->email,  'project_id' => request()->project_id]);
+        return redirect()->route('employees.index')
+            ->with('success', 'Employee created successfully.');
     }
 
     //     if($request->hasFile('photos')){
@@ -155,7 +101,7 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Expense $expense)
+    public function show(Employee $employee)
     {
         $loans = Loan::all();
 
@@ -167,7 +113,7 @@ class ExpenseController extends Controller
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
-        return view('dashboard.expenses.show', compact('expense', 'customers', 'vendors', 'users', 'orders','loans'));
+        return view('dashboard.employees.show', compact('employee', 'customers', 'vendors', 'users', 'orders','loans'));
     }
 
     /**

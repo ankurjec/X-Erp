@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Expense;
+use App\Models\DebitNote;
+
 use App\Models\Vendor;
 use App\Models\Customer;
 use App\Models\Loan;
@@ -13,14 +14,14 @@ use App\Notifications\NewExpense;
 use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 
-class ExpenseController extends Controller
+class DebitNoteController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:expense-list|expense-create|expense-edit|expense-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:expense-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:expense-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:expense-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:debit_note-list|debit_note-create|debit_note-edit|debit_note-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:debit_note-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:debit_note-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:debit_note-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -29,8 +30,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::with(['vendor', 'user'])->with('order')->latest()->paginate(10);
-        return view('dashboard.expenses.index', compact('expenses'))
+        $debit_notes = DebitNote::with(['vendor', 'user'])->with('order')->latest()->paginate(10);
+        return view('dashboard.debit_note.index', compact('debit_notes'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -46,13 +47,14 @@ class ExpenseController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
-        $orders = Order::where(function ($query) {
+        $orders = Order::where(function ($query)
+         {
             $query->where('order_status', '!=', 'completed')
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
 
-        return view('dashboard.expenses.create', compact('customers', 'vendors', 'users', 'orders','loans'));
+        return view('dashboard.debit_note.create', compact('customers', 'vendors', 'users', 'orders','loans'));
     }
 
     /**
@@ -66,31 +68,29 @@ class ExpenseController extends Controller
         request()->validate([
             'type' => 'required',
             'amount' => 'required',
-            'photos.*' => 'required|mimes:pdf,xlx,csv,doc,docx,jpg,jpeg,png,txt|max:5034',
 
         ]);
 
         $types = $request->input('type');
         //  dd($request->photos);
         foreach ($types as $key => $type) {
-            $expense = new Expense;
-            $expense->createdby_user_id = $request->user()->id;
-            $expense->type = $request->input('type')[$key];
+            $debit_note = new DebitNote();
+            $debit_note->createdby_user_id = $request->user()->id;
+            $debit_note->type = $request->input('type')[$key];
 
             if ($request->input('type')[$key] == "general_expense" && $request->hasFile('photos')) {
-                $expense->user_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
+                $debit_note->user_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
             } else if ($request->input('type')[$key] == "vendor_payment" && $request->hasFile('photos')) {
-                $expense->vendor_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
+                $debit_note->vendor_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
             } else if ($request->input('type')[$key] == "refunds" && $request->hasFile('photos')) {
-                $expense->customer_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
+                $debit_note->customer_id = isset($request->input('entity_id')[$key]) ? $request->input('entity_id')[$key] : null;
             }
 
             /*$expense->user_id = isset($request->input('user_id')[$key]) ? $request->input('user_id')[$key] : null;
     		    $expense->vendor_id = isset($request->input('vendor_id')[$key]) ? $request->input('vendor_id')[$key] : null;
     		    $expense->customer_id = isset($request->input('customer_id')[$key]) ? $request->input('customer_id')[$key] : null;*/
-            $expense->order_id = isset($request->input('order_id')[$key]) ? $request->input('order_id')[$key] : null;
-            $expense->amount = $request->input('amount')[$key];
-            //$expense->details = $request->input('details')[$key];
+            $debit_note->amount = $request->input('amount')[$key];
+            $debit_note->details = $request->input('details')[$key];
 
 
             // if($request->hasFile('photos')){
@@ -108,25 +108,21 @@ class ExpenseController extends Controller
                         $paths = $paths . ',' . $path;
                     }
                 }
-                $expense->filename = $path;
+                $debit_note->filename = $path;
             }
 
 
 
 
-            $expense->project_id = get_project_id();
-            $expense->save();
+            $debit_note->project_id = get_project_id();
+            $debit_note->save();
 
             $user = User::find(1);
-            try {
-                $user->notify(new NewExpense($expense));
-            } catch (\Exception $e) {
-                \Log::error($e->getMessage());
-            }
+            
         }
 
-        return redirect()->route('expenses.index')
-            ->with('success', 'Expenses created successfully.');
+        return redirect()->route('debit_note.index')
+            ->with('success', 'Debit Note created successfully.');
     }
 
     //     if($request->hasFile('photos')){
@@ -155,7 +151,7 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Expense $expense)
+    public function show(DebitNote $debit_note)
     {
         $loans = Loan::all();
 
@@ -167,7 +163,7 @@ class ExpenseController extends Controller
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
-        return view('dashboard.expenses.show', compact('expense', 'customers', 'vendors', 'users', 'orders','loans'));
+        return view('dashboard.debit_note.show', compact( 'customers','loans', 'vendors', 'users', 'orders','debit_note'));
     }
 
     /**
@@ -176,7 +172,7 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Expense $expense)
+    public function edit(DebitNote $debit_note)
     {
         $loans = Loan::all();
 
@@ -188,7 +184,7 @@ class ExpenseController extends Controller
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
-        return view('dashboard.expenses.edit', compact('loans','expense', 'customers', 'vendors', 'users', 'orders'));
+        return view('dashboard.debit_note.edit', compact( 'loans','debit_note','customers', 'vendors', 'users', 'orders'));
     }
 
     /**
@@ -198,17 +194,17 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expense $expense)
+    public function update(Request $request, DebitNote $debit_note)
     {
         request()->validate([
             'type' => 'required',
             'amount' => 'required'
         ]);
 
-        $expense->update(request()->except(['_method', '_token', 'action']));
+        $debit_note->update(request()->except(['_method', '_token', 'action']));
 
-        return redirect()->route('expenses.index')
-            ->with('success', 'Expense updated successfully');
+        return redirect()->route('debit_note.index')
+            ->with('success', 'Debit Notes updated successfully');
     }
 
     /**
@@ -217,12 +213,12 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expense $expense)
+    public function destroy(DebitNote $debit_note)
     {
-        $expense->delete();
+        $debit_note->delete();
 
-        return redirect()->route('expenses.index')
-            ->with('success', 'Expense deleted successfully');
+        return redirect()->route('debit_note.index')
+            ->with('success', 'Debit Note deleted successfully');
     }
 
     public function AddToLoanRepayment($loan_id,$amount,$expense_id,$repayment_date) {

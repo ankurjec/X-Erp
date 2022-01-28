@@ -7,6 +7,9 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DebitNoteController;
+use App\Http\Controllers\CreditNoteController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProjectController;
@@ -43,6 +46,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('vendors', VendorController::class);
     Route::resource('customers', CustomerController::class);
     Route::resource('expenses', ExpenseController::class);
+    Route::resource('debit_note', DebitNoteController::class);
+    Route::resource('credit_note', CreditNoteController::class);
+    Route::resource('employees', EmployeeController::class);
+
     Route::resource('payments_received', PaymentsReceivedController::class);
     Route::resource('payments', PaymentController::class);
     Route::resource('loans', LoanController::class);
