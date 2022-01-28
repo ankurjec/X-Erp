@@ -97,13 +97,26 @@
 		        <div class="form-group">
 		            <strong>Order:</strong>
 		            <select name="order_id" class="form-control" disabled="true">
-		                <option value="" disabled selected="selected">Select</option>
+		                <option value="" selected="selected">Select</option>
 		                @foreach($orders as $order)
     		                <option value="{{$order->id}}" @if($expense->order_id == $order->id) selected="selected" @endif>#{{$order->id}}-{{substr($order->name,0,20)}}</option>
 		                @endforeach
 		            </select>
 		        </div>
 		    </div>
+
+			<div class="col-xs-3 col-sm-3 col-md-3">
+				<div class="form-group">
+					<strong>Loan (If Applicable):</strong>
+					<select name="loan_id" class="form-control" disabled="true">
+						<option value="" selected="selected">Select</option>
+						@foreach ($loans as $loan)
+							<option value="{{ $loan->id }}" @if($expense->loan_id == $loan->id) selected="selected" @endif>
+								#{{ $loan->id }}({{ moneyFormatIndia($loan->amount) }})</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
 		    
 		    <div class="col-xs-4 col-sm-4 col-md-4">
 		        <div class="form-check">

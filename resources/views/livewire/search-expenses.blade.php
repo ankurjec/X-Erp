@@ -1,13 +1,9 @@
 <div>
     <div>
-        <input class="form-control" wire:model="search" type="search" placeholder="Search posts by Name...">
-
-        <h1>Search Results:</h1>
-
-
+        <input class="form-control" wire:model="search" type="search" placeholder="Search Expenses">
     </div>
     <div class="table100 ver1">
-        <table class="table table-bordered table-striped table-condensed table-responsive-sm">
+        <table class="table table-bordered table-striped table-condensed table-responsive-sm" wire:loading.class="loading" wire:target="search">
             <tr>
                 <th>Id #</th>
                 <th>Type</th>
@@ -15,6 +11,7 @@
                 <th>Amount (Rs.)</th>
                 <th>Paid/Unpaid</th>
                 <th>Order</th>
+                <th>Loan</th>
                 <th>Date</th>
                 <th>Details</th>
                 <!--<th>Total Paid (Rs.) <i class="fas fa-info-circle" title="This may include multiple expenses"></i></th>-->
@@ -22,7 +19,7 @@
             </tr>
             @forelse ($expenses as $key=>$expense)
             <tr>
-                <td>{{ $key + 1 }}</td>
+                <td>{{ $expense->id }}</td>
                 <td>{{ $expense->type_string }}</td>
                 <td>
                     @if($expense->type == 'general_expense')
@@ -36,10 +33,11 @@
                 <td>{{ moneyFormatIndia($expense->amount) }}</td>
                 <td>{!! $expense->paid_flag ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-secondary">Unpaid</span>'!!}</td>
                 <td>
-                    @if($expense->order)
+                    @if($expense->order_id)
                     #{{ $expense->order->id }}-{{ substr($expense->order->name,0,20) }}
                     @endif
                </td>
+               <td>{{ $expense->loan_id ? '#'.$expense->loan_id.'('.$expense->loan->vendor->name.')' : '' }}</td>
                <td>
                    {{ $expense->created_at->format('d M Y') }}
                </td>

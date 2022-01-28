@@ -33,16 +33,18 @@
     <div class="table100 ver1">
     <table class="table table-bordered table-striped table-condensed table-responsive-sm">
         <tr>
-            <th>No</th>
+            <th>Loan No</th>
             <th>From</th>
             <th>Amount</th>
+            <th>Total Repayment</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($loans as $loan)
 	    <tr>
-	        <td>{{ ++$i }}</td>
-	        <td>{{ $loan->user->name }}</td>
-	        <td>{{ $loan->amount }}</td>
+	        <td>{{ $loan->id }}</td>
+	        <td>{{ $loan->vendor->name }}</td>
+	        <td>{{ moneyFormatIndia($loan->amount) }}</td>
+            <td>{{ moneyFormatIndia($loan->total_repayment) }}</td>
 	        <td>
                 <form class="delForm" action="{{ route('loans.destroy',$loan->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('loans.show',$loan->id) }}">Show</a>

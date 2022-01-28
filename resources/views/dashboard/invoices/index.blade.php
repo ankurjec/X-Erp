@@ -5,7 +5,7 @@
           <!-- Breadcrumb-->
           <ol class="breadcrumb border-0 m-0">
             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-            <li class="breadcrumb-item active">Manage Expenses</li>
+            <li class="breadcrumb-item active">Invoices</li>
             <!-- Breadcrumb Menu-->
           </ol>
 </div>
@@ -20,17 +20,17 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="float-left">
-                <h2>Expenses</h2>
+                <h2>Invoices</h2>
             </div>
             <div class="float-right">
-                @can('expense-create')
-                <a class="btn btn-success" href="{{ route('expenses.create') }}"> New Expense</a>
+                @can('invoice-create')
+                <a class="btn btn-success" href="{{ route('invoices.create') }}"> New Invoice</a>
                 @endcan
             </div>
         </div>
     </div>
 
-    @livewire('search-expenses')
+   @livewire('search-invoices')
 
 	      </div>
         </div>

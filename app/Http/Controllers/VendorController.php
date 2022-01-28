@@ -18,9 +18,8 @@ class VendorController extends Controller
     
     public function index()
     {
-        $vendors = Vendor::latest()->paginate(10);
-        return view('dashboard.vendors.index',compact('vendors'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        // $vendors = Vendor::latest()->paginate(10);
+        return view('dashboard.vendors.index');
     }
     
     
@@ -34,12 +33,10 @@ class VendorController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'detail' => 'required',
-            //'photos.*'=> 'required|max:5034|mimes:pdf,PDF,jpg,png,jpeg,txt',
-            'photos.*' => 'required|mimes:pdf,xlx,csv,doc,docx,jpg,jpeg,png,txt|max:5034',
+            'detail' => 'required'
         ]);
     
-       
+        $path = '';
         if($request->hasFile('photos')){
             // dd($request->photos);
             $paths = '';
@@ -112,8 +109,7 @@ class VendorController extends Controller
     {
          request()->validate([
             'name' => 'required',
-            'detail' => 'required',
-            'photos'=> 'required|max:5034|mimes:pdf,jpg,png,jpeg,txt',
+            'detail' => 'required'
 
         ]);
     
@@ -123,7 +119,7 @@ class VendorController extends Controller
     //                     ->with('success','Vendor updated successfully');
     // }
 
-    
+    $path = '';
     if($request->hasFile('photos')){
         // dd($request->photos);
 

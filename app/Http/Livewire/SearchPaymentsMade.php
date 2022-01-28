@@ -22,12 +22,24 @@ class SearchPaymentsMade extends Component
     public function render()
     
 {
-    $query = Payment::query();
+    $query = Payment::with(['vendor','customer','final_beneficiary']);
     if($this->search){
         $query->where('expense_ids', 'like', '%' . $this->search . '%');
+        
+        $query->orWhereHas('vendor', function ($q) {
+            $q->where('name', 'like', '%' . $this->search . '%');
+        });
+
+        $query->orWhereHas('customer', function ($q) {
+            $q->where('name', 'like', '%' . $this->search . '%');
+        });
+
+        $query->orWhereHas('final_beneficiary', function ($q) {
+            $q->where('name', 'like', '%' . $this->search . '%');
+        });
     }
     return view('livewire.search-payments-made', [
-        'payments' => $query->paginate(10),
+        'payments' => $query->orderBy('payment_date', 'DESC')->paginate(10),
     ]);
 }
 }

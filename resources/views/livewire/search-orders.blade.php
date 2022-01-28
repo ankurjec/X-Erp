@@ -1,9 +1,6 @@
 <div>
     <div>
-        <input class="form-control" wire:model="search" type="search" placeholder="Search posts by Name...">
-
-        <h1>Search Results:</h1>
-
+        <input class="form-control" wire:model="search" type="search" placeholder="Search Orders">
 
     </div>
         <div class="table100 ver1">
@@ -47,6 +44,9 @@
                     <td>{{ moneyFormatIndia($order->balance) }}</td>
                     <td>
                         <form class="delForm" action="{{ route('orders.destroy',$order->id) }}" method="POST">
+                            <a class="btn btn-warning btn-sm" target="_blank" href="{{ route('expenses.index') }}?order_id={{ $order->id }}" title="View Order Expenses">Expenses</a>
+                            <a class="btn btn-success btn-sm" target="_blank" href="{{ route('payments_received.index') }}?order_id={{ $order->id }}" title="View Payments Received of the Order">Payments Received</a>
+
                             <a class="btn btn-info" href="{{ route('orders.show',$order->id) }}">Show</a>
                             @can('order-edit')
                             <a class="btn btn-primary" href="{{ route('orders.edit',$order->id) }}">Edit</a>

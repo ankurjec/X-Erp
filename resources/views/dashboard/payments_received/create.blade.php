@@ -1,5 +1,11 @@
 @extends('layouts.admin-master')
 
+@section('style')
+    @parent
+    <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.css">
+@endsection
+
 @section('breadcrumb')
 <div class="c-subheader px-3">
           <!-- Breadcrumb-->
@@ -51,7 +57,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Customer:</strong>
-		            <select name="customer_id" class="form-control customer_id_select">
+		            <select name="customer_id" class="form-control customer_id_select select2">
 		                <option value="" disabled selected="selected">Select</option>
 		                @foreach($customers as $customer)
 		                <option value="{{$customer->id}}">{{$customer->name}}</option>
@@ -68,10 +74,11 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Mode:</strong>
-		            <select name="mode" class="form-control">
+		            <select name="mode" class="form-control select2">
 		                <option value="" disabled selected="selected">Select</option>
-		                <option value="bank_transfer">Bank Transfer</option>
-		                <option value="cash">Cash</option>
+						@foreach(config('settings.mode_of_payments') as $mode_of_payment)
+		                <option value="{{ $mode_of_payment }}">{{ $mode_of_payment }}</option>
+						@endforeach
 		            </select>
 		        </div>
 		    </div>
@@ -79,6 +86,10 @@
 		        <div class="form-group">
 		            <strong>Invoice No:</strong>
 		            <input type="text" name="invoice_no" class="form-control" placeholder="Invoice No">
+		        </div>
+				<div class="form-group">
+		            <strong>No Invoice Reason (Enter if there is no Invoice):</strong>
+		            <input type="text" name="no_invoice_reason" class="form-control" placeholder="No Invoice Reason">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">

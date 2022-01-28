@@ -16,7 +16,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'expense_ids', 'amount', 'paid_to_name', 'paid_entity', 'user_id', 'vendor_id', 'customer_id', 'payment_date', 'reference_no', 'details', 'project_id'
+        'expense_ids', 'amount', 'paid_to_name', 'paid_entity', 'user_id', 'vendor_id', 'customer_id', 'payment_date', 'reference_no', 'details', 'project_id', 'final_beneficiary_id'
     ];
     
     protected $casts = [
@@ -37,5 +37,10 @@ class Payment extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function final_beneficiary()
+    {
+        return $this->belongsTo(Vendor::class,'final_beneficiary_id');
     }
 }

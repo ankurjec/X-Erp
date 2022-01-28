@@ -4,7 +4,7 @@
 	@parent
 <link rel="stylesheet" href="/vendor/bootstrap4-multiselect/css/BsMultiSelect.min.css">
 <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
-<link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.min.css">
+<link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.css">
 @endsection
 
 @section('breadcrumb')
@@ -71,7 +71,7 @@
 		        </div>
 		    </div>
 		    
-		    <div class="col-xs-12 col-sm-12 col-md-12 user_id_select_box" style="display:none">
+		    {{-- <div class="col-xs-12 col-sm-12 col-md-12 user_id_select_box" style="display:none">
 		        <div class="form-group">
 		            <strong>User:</strong>
 		            <select name="user_id" class="form-control user_id_select select2">
@@ -83,7 +83,7 @@
 		                @endforeach
 		            </select>
 		        </div>
-		    </div>
+		    </div> --}}
 		    <div class="col-xs-12 col-sm-12 col-md-12 vendor_id_select_box" style="display:none">
 		        <div class="form-group">
 		            <strong>Vendor:</strong>

@@ -55,6 +55,12 @@ function get_gst_state_list() {
 }
 
 function moneyFormatIndia($num){
+    $negative = false;
+    if($num<0)
+    {
+        $negative = true;
+        $num = abs($num);
+    }
 	$num=number_format((float)$num, 2, '.', '');
 	$str=explode('.',$num,2);
 	$num=$str[0];
@@ -76,6 +82,11 @@ function moneyFormatIndia($num){
         $thecash = $explrestunits.$lastthree;
     } else {
         $thecash = $num;
+    }
+
+    if($negative)
+    {
+        return '(-) '.$thecash.'.'.$str[1];
     }
     return $thecash.'.'.$str[1]; // writes the final format where $currency is the currency symbol.
 }
@@ -104,4 +115,8 @@ function moneyFormatIndia_int($num){
         $thecash = $num;
     }
     return $thecash; // writes the final format where $currency is the currency symbol.
+}
+
+function date_custom($date) {
+    return $date>0 ? date('d/m/Y', strtotime($date)) : '';
 }

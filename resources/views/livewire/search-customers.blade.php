@@ -1,9 +1,6 @@
 <div>
     <div>
-        <input class="form-control" wire:model="search" type="search" placeholder="Search posts by title...">
-
-        <h1>Search Results:</h1>
-
+        <input class="form-control" wire:model="search" type="search" placeholder="Search Customers">
 
     </div>
     <div class="table100 ver1">
