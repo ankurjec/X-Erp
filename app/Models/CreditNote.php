@@ -12,7 +12,7 @@ class CreditNote extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
-        'type', 'entity_type', 'user_id', 'vendor_id', 'customer_id', 'employee_id', 'amount', 'details', 'project_id', 'createdby_user_id', 
+        'type', 'entity_type', 'user_id', 'vendor_id', 'customer_id', 'employee_id', 'amount', 'details','paid_flag', 'project_id', 'createdby_user_id', 
     ];
     
     public function user()

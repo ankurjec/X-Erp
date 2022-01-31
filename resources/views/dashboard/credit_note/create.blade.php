@@ -1,143 +1,139 @@
 @extends('layouts.admin-master')
 
 @section('style')
-    @parent
-    <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
-    <link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.css">
+@parent
+<link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
+<link rel="stylesheet" href="/vendor/select2/css/select2-bootstrap4.css">
 @endsection
 
 @section('breadcrumb')
-    <div class="c-subheader px-3">
-        <!-- Breadcrumb-->
-        <ol class="breadcrumb border-0 m-0">
-            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-            <li class="breadcrumb-item"><a href="/expenses">Manage Credit Note</a></li>
-            <li class="breadcrumb-item active">Add Credit Note</li>
-            <!-- Breadcrumb Menu-->
-        </ol>
-    </div>
+<div class="c-subheader px-3">
+    <!-- Breadcrumb-->
+    <ol class="breadcrumb border-0 m-0">
+        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+        <li class="breadcrumb-item"><a href="/expenses">Manage Credit Note</a></li>
+        <li class="breadcrumb-item active">Add Credit Note</li>
+        <!-- Breadcrumb Menu-->
+    </ol>
+</div>
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="fade-in">
-            <div class="card">
-                <div class="card-body">
+<div class="container-fluid">
+    <div class="fade-in">
+        <div class="card">
+            <div class="card-body">
 
-                    <div class="row">
-                        <div class="col-lg-12 margin-tb">
-                            <!--<div class="float-left">
+                <div class="row">
+                    <div class="col-lg-12 margin-tb">
+                        <!--<div class="float-left">
                     <h2>Add Expenses</h2>
                 </div>-->
-                            <div class="float-right">
-                                <a class="btn btn-primary" href="{{ route('credit_note.index') }}"> Back</a>
+                        <div class="float-right">
+                            <a class="btn btn-primary" href="{{ route('credit_note.index') }}"> Back</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <form action="{{ route('credit_note.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="project_id" value="{{ get_project_id() }}">
+
+                    <div class="input_fields_wrap">
+                        <div class="card bg-light mb-3 expense-card">
+                            <div class="card-header">Credit Note
+                            </div>
+                            <div class="card-body">
+                                <div class="expense_row row">
+                                    <div class="col-xs-3 col-sm-3 col-md-3">
+                                        <div class="form-group">
+                                            <strong>Expense Type:</strong>
+                                            <select name="type[]" class="form-control entity_type_select">
+                                                <option value="" disabled selected="selected">Select</option>
+                                                {{-- <option value="general_expense">General Expense</option> --}}
+                                                <option value="vendor_payment">Vendor Payment</option>
+                                                <option value="refunds">Refunds</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {{-- <div class="col-xs-3 col-sm-3 col-md-3 user_id_select_box"
+                                        style="display:none">
+                                        <div class="form-group">
+                                            <strong>User:</strong>
+                                            <select name="entity_id[]" class="form-control user_id_select select2">
+                                                <option value="" disabled selected="selected">Select</option>
+                                                @foreach ($users as $user)
+                                                @if ($user->id > 1)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div> --}}
+                                    <div class="col-xs-3 col-sm-3 col-md-3 vendor_id_select_box" style="display:none">
+                                        <div class="form-group">
+                                            <strong>Vendor:</strong>
+                                            <select name="entity_id[]" class="form-control vendor_id_select select2">
+                                                <option value="" disabled selected="selected">Select</option>
+                                                @foreach ($vendors as $vendor)
+                                                <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 col-sm-3 col-md-3 customer_id_select_box" style="display:none">
+                                        <div class="form-group">
+                                            <strong>Customer:</strong>
+                                            <select name="entity_id[]" class="form-control customer_id_select select2">
+                                                <option value="" disabled selected="selected">Select</option>
+                                                @foreach ($customers as $customer)
+                                                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2">
+                                        <div class="form-group">
+                                            <strong>Amount (Rs.):</strong>
+                                            <input type="number" min="1" step="0.01" name="amount[]"
+                                                class="form-control" placeholder="Amount">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
+                                        <div class="form-group">
+                                            <strong>Detail:</strong>
+                                            <textarea class="form-control" name="details[]"
+                                                placeholder="Detail"></textarea>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
 
-
-                    <form action="{{ route('credit_note.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="project_id" value="{{ get_project_id() }}">
-
-                        <div class="input_fields_wrap">
-                            <div class="card bg-light mb-3 expense-card">
-                                <div class="card-header">Expense
-                                    <a class="delBtn btn btn-danger btn-sm float-right" href="#" role="button"
-                                        title="Delete">
-                                        Delete
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <div class="expense_row row">
-                                        <div class="col-xs-3 col-sm-3 col-md-3">
-                                            <div class="form-group">
-                                                <strong>Expense Type:</strong>
-                                                <select name="type[]" class="form-control entity_type_select">
-                                                    <option value="" disabled selected="selected">Select</option>
-                                                    {{-- <option value="general_expense">General Expense</option> --}}
-                                                    <option value="vendor_payment">Vendor Payment</option>
-                                                    <option value="refunds">Refunds</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        {{-- <div class="col-xs-3 col-sm-3 col-md-3 user_id_select_box" style="display:none">
-                                            <div class="form-group">
-                                                <strong>User:</strong>
-                                                <select name="entity_id[]" class="form-control user_id_select select2">
-                                                    <option value="" disabled selected="selected">Select</option>
-                                                    @foreach ($users as $user)
-                                                        @if ($user->id > 1)
-                                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div> --}}
-                                        <div class="col-xs-3 col-sm-3 col-md-3 vendor_id_select_box" style="display:none">
-                                            <div class="form-group">
-                                                <strong>Vendor:</strong>
-                                                <select name="entity_id[]" class="form-control vendor_id_select select2">
-                                                    <option value="" disabled selected="selected">Select</option>
-                                                    @foreach ($vendors as $vendor)
-                                                        <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-3 col-sm-3 col-md-3 customer_id_select_box" style="display:none">
-                                            <div class="form-group">
-                                                <strong>Customer:</strong>
-                                                <select name="entity_id[]" class="form-control customer_id_select select2">
-                                                    <option value="" disabled selected="selected">Select</option>
-                                                    @foreach ($customers as $customer)
-                                                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-2 col-sm-2 col-md-2">
-                                            <div class="form-group">
-                                                <strong>Amount (Rs.):</strong>
-                                                <input type="number" min="1" step="0.01" name="amount[]"
-                                                    class="form-control" placeholder="Amount">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-4 col-sm-4 col-md-4">
-                                            <div class="form-group">
-                                                <strong>Detail:</strong>
-                                                <textarea class="form-control" name="details[]"
-                                                    placeholder="Detail"></textarea>
-                                            </div>
-                                        </div>
-
-                          
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button id="add_prod" class="btn btn-info float-right" type="button"> ADD MORE</button>
-                        <div class="clearfix"></div>
-                        <hr />
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                    <div class="clearfix"></div>
+                    <hr />
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
 
 
-                    </form>
+                </form>
 
-  
 
-	      </div>
+
+            </div>
         </div>
     </div>
-@endsection
+    @endsection
 
-@section('script')
+    @section('script')
     @parent
     <script src="/vendor/select2/js/select2.full.min.js"></script>
     <script type="text/javascript">
@@ -224,4 +220,4 @@
             });
         });
     </script>
-@endsection
+    @endsection

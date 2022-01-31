@@ -47,14 +47,13 @@ class CreditNoteController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $users = User::all();
-        $orders = Order::where(function ($query)
-         {
+        $orders = Order::where(function ($query) {
             $query->where('order_status', '!=', 'completed')
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
 
-        return view('dashboard.credit_note.create', compact('customers', 'vendors', 'users', 'orders','loans'));
+        return view('dashboard.credit_note.create', compact('customers', 'vendors', 'users', 'orders', 'loans'));
     }
 
     /**
@@ -65,6 +64,7 @@ class CreditNoteController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         request()->validate([
             'type' => 'required',
             'amount' => 'required',
@@ -97,32 +97,13 @@ class CreditNoteController extends Controller
             //     //         // dd($request->photos);
 
             //         }
-            $photos_multiple = $request->photos;
-            if ($photos_multiple) {
-                $paths = '';
-                foreach ($photos_multiple as $photo) {
-                    $path = $photo->store('uploads/expenses');
-                    if (!$paths) {
-                        $paths = $path;
-                    } else {
-                        $paths = $paths . ',' . $path;
-                    }
-                }
-                $credit_note->filename = $path;
-            }
-
-
-
-
             $credit_note->project_id = get_project_id();
             $credit_note->save();
-
             $user = User::find(1);
-            
         }
 
         return redirect()->route('credit_note.index')
-            ->with('success', 'credit Note created successfully.');
+            ->with('success', 'Credit Note created successfully.');
     }
 
     //     if($request->hasFile('photos')){
@@ -163,7 +144,7 @@ class CreditNoteController extends Controller
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
-        return view('dashboard.credit_note.show', compact( 'customers','loans', 'vendors', 'users', 'orders','credit_note'));
+        return view('dashboard.credit_note.show', compact('customers', 'loans', 'vendors', 'users', 'orders', 'credit_note'));
     }
 
     /**
@@ -184,7 +165,7 @@ class CreditNoteController extends Controller
                 ->where('order_status', '!=', 'cancelled');
         })
             ->get();
-        return view('dashboard.credit_note.edit', compact( 'loans','credit_note','customers', 'vendors', 'users', 'orders'));
+        return view('dashboard.credit_note.edit', compact('loans', 'credit_note', 'customers', 'vendors', 'users', 'orders'));
     }
 
     /**
@@ -196,6 +177,7 @@ class CreditNoteController extends Controller
      */
     public function update(Request $request, creditNote $credit_note)
     {
+        // dd($request);
         request()->validate([
             'type' => 'required',
             'amount' => 'required'
@@ -204,7 +186,7 @@ class CreditNoteController extends Controller
         $credit_note->update(request()->except(['_method', '_token', 'action']));
 
         return redirect()->route('credit_note.index')
-            ->with('success', 'credit Notes updated successfully');
+            ->with('success', 'Credit Notes updated successfully');
     }
 
     /**
@@ -221,12 +203,13 @@ class CreditNoteController extends Controller
             ->with('success', 'Credit Note deleted successfully');
     }
 
-    public function AddToLoanRepayment($loan_id,$amount,$expense_id,$repayment_date) {
+    public function AddToLoanRepayment($loan_id, $amount, $expense_id, $repayment_date)
+    {
         LoanRepayment::create([
-            'loan_id' => $loan_id, 
+            'loan_id' => $loan_id,
             'amount' => $amount,
             'repayment_date' => $repayment_date,
-            'details' => 'Automatically created by expense #'.$expense_id,
+            'details' => 'Automatically created by expense #' . $expense_id,
             'project_id' => get_project_id()
         ]);
     }
